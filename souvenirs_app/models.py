@@ -6,6 +6,7 @@ class Souvenir(models.Model):
     """"""
 
     souvenir_id = models.AutoField(primary_key=True)
+
     send_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='send_user')
     send_date = models.DateField(auto_now_add=True)
     receive_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receive_user')
@@ -16,13 +17,24 @@ class Souvenir(models.Model):
     STATUS_CHOICES = (('TR', 'Travelling'), ('RCV', 'Received'))
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Travelling')
+    extra_name = models.CharField(max_length=10, default='')
+    # # slug = models.SlugField(max_length=30, default='', null=True)
+    #
+    # def save(self):
+    #     super(Souvenir, self).save()
+    #     if not self.slug:
+    #         self.slug = slugify(self.username)+'-'+str(self.souvenir_id)
+    #         super(Souvenir, self).save()
 
     def __str__(self):
         return str(self.souvenir_id)
 
+
+
     class Meta:
         verbose_name = 'Souvenir'
         verbose_name_plural = 'Souvenirs'
+
 
 
 class Country(models.Model):
@@ -42,8 +54,10 @@ class UserInfo(models.Model):
     ''''''
 
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    avatar = models.ImageField(upload_to='avatars/', default='no-avatar.png', null=True, blank=True)
     sex = models.CharField(max_length=6, choices=(('MALE', 'male'), ('FEMALE', 'female')))
     age = models.PositiveIntegerField(default=0, null=True, blank=True)
+    date_of_birthday = models.DateField(null=True, blank=True)
     country = models.OneToOneField(Country, on_delete=models.CASCADE, related_name='userinfo')
     city = models.CharField(max_length=30)
     address = models.TextField(max_length=200)

@@ -1,0 +1,17 @@
+{% extends 'souvenirs_app/base.html' %}
+
+{% block content %}
+    <h2>Sent souvenirs</h2>
+
+    <ul>
+        {% for souvenir in send_user_souvenirs %}
+
+            <li><a href="{% url 'souvenirs_app:souvenir' souvenir.souvenir_id %}">{{ souvenir.souvenir_id }}</a> : {{ souvenir.send_user }} to {{ souvenir.receive_user }}</li>
+        {% empty %}
+            <li>No souvenirs have been sent yet</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'souvenirs_app:new_souvenir' %}">Send another souvenir</a>
+
+{% endblock content %}

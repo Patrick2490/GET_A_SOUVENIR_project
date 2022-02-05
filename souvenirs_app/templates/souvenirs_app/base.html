@@ -9,7 +9,16 @@
 </header>
 <body>
 <p>
+    <a href="{% url 'souvenirs_app:user_info' %}">Fill the information about you</a>
+</p>
+<p>
     <a href="{%  url 'souvenirs_app:souvenirs' %}">Souvenirs</a>
+</p>
+<p>
+    <a href="{%  url 'souvenirs_app:send_user_souvenirs' %}">Sent Souvenirs</a>
+</p>
+<p>
+    <a href="{%  url 'souvenirs_app:receive_user_souvenirs' %}">Received Souvenirs</a>
 </p>
 {% if user.is_authenticated %}
     Hello, {{ user.username }}!
