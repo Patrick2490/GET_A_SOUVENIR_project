@@ -1,0 +1,16 @@
+{% extends 'souvenirs_app/base.html' %}
+
+{% block content %}
+    <h2>Souvenir #{{ souvenir.souvenir_id }} sent by {{ souvenir.send_user }} to {{ souvenir.receive_user }} on {{ souvenir.send_date }}</h2>
+    <h3>Status: {{ postcard.status }}</h3>
+    {% if souvenir.receive_user_img %}
+        <img src="{{ souvenir.receive_user_img.url }}" alt="img">
+    {% else %}
+        <p></p>
+    {% endif %}
+{% endblock content %}
+
+{#another version of view#}
+{#    {% for img in souvenir_image %}#}
+{#        <img src="{{ img.url }}" alt="img">#}
+{#    {% endfor %}#}

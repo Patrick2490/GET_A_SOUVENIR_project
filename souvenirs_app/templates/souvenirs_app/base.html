@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GET A SOUVENIR</title>
+</head>
+<header>
+    <a href="{% url 'souvenirs_app:index' %}">GET A SOUVENIR</a>
+</header>
+<body>
+<p>
+    <a href="{%  url 'souvenirs_app:souvenirs' %}">Souvenirs</a>
+</p>
+{% if user.is_authenticated %}
+    Hello, {{ user.username }}!
+    <a href="{% url 'users:logout' %}">Log out</a>
+{% else %}
+    <a href="{% url 'users:register' %}">Register</a>
+    <a href="{% url 'users:login' %}">Log in</a>
+{% endif %}
+{% block content %}{% endblock content %}
+</body>
+</html>
