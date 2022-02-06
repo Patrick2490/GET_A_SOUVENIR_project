@@ -1,0 +1,14 @@
+{% extends 'souvenirs_app/base.html' %}
+
+{% block content %}
+
+    <h4>Fill in the fields</h4>
+
+    <form action="{% url 'souvenirs_app:new_user_info' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button name="submit">save</button>
+    </form>
+
+
+{% endblock content %}

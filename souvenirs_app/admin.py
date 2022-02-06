@@ -12,7 +12,7 @@ class CountryAdmin(admin.ModelAdmin):
 
 @admin.register(models.UserInfo)
 class UserInfoAdmin(admin.ModelAdmin):
-    list_display = ('username', 'sex', 'age', 'country', 'city', 'address')
+    list_display = ('username', 'avatar', 'sex', 'date_of_birthday', 'country', 'city', 'address')
     ordering = ['username']
 
 @admin.register(models.Souvenir)

@@ -40,8 +40,8 @@ class Souvenir(models.Model):
 class Country(models.Model):
     ''''''
 
-    title = models.CharField(max_length=30)
-    code = models.CharField(max_length=3)
+    title = models.CharField(max_length=30, unique=True)
+    code = models.CharField(max_length=3, unique=True)
 
     def __str__(self):
         return self.title
@@ -54,11 +54,11 @@ class UserInfo(models.Model):
     ''''''
 
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    avatar = models.ImageField(upload_to='avatars/', default='no-avatar.png', null=True, blank=True)
+    avatar = models.ImageField(upload_to='avatars/', default='no-avatar.jpg', null=True, blank=True)
     sex = models.CharField(max_length=6, choices=(('MALE', 'male'), ('FEMALE', 'female')))
-    age = models.PositiveIntegerField(default=0, null=True, blank=True)
+    # age = models.PositiveIntegerField(default=0, null=True, blank=True)
     date_of_birthday = models.DateField(null=True, blank=True)
-    country = models.OneToOneField(Country, on_delete=models.CASCADE, related_name='userinfo')
+    country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name='userinfo', unique=False)
     city = models.CharField(max_length=30)
     address = models.TextField(max_length=200)
 

@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Souvenir #{{ souvenir.souvenir_id }} sent by {{ souvenir.send_user }} to {{ souvenir.receive_user }} on {{ souvenir.send_date }}</h2>
-    <h3>Status: {{ postcard.status }}</h3>
+    <h3>Status: {{ souvenir.status }}</h3>
     {% if souvenir.receive_user_img %}
         <img src="{{ souvenir.receive_user_img.url }}" alt="img">
     {% else %}

@@ -8,8 +8,11 @@ class SouvenirForm(forms.ModelForm):
         fields = ['souvenir_id', 'send_user_img', 'receive_user_img']
 
 
+
 class UserInfoForm(forms.ModelForm):
+    date_of_birthday = forms.DateField(widget=forms.DateInput(format='%d-%m-%Y'))
     class Meta:
         model = UserInfo
         fields = '__all__'
-        widgets = {'date_of_birthday': DateInput()}
+        # widgets = {'date_of_birthday': DateInput(format='%d-%m-%Y')}
+
