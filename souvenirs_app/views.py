@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from django.contrib.auth.models import User
 from .models import Souvenir, UserInfo, Country
@@ -74,19 +74,29 @@ def new_souvenir(request):
     return render(request, 'souvenirs_app/new_souvenir.html', context)
 
 
-@login_required
-def new_user_info(request):
-    if request.method != 'POST':
-        form = UserInfoForm()
-    else:
-        form = UserInfoForm(request.POST, request.FILES)
-        if form.is_valid():
-            new_user_info = form.save(commit=False)
-            new_user_info.username = request.user
-            new_user_info.save()
-            return redirect('souvenirs_app:index')
-    context = {'form': form}
-    return render(request, 'souvenirs_app/new_user_info.html', context)
+class CreateUserInfo(CreateView):
+    model = UserInfo
+    form_class = UserInfoForm
+    template_name = 'souvenirs_app/create_user_info.html'
+    context_object_name = 'create_user_info'
+
+    def form_valid(self, form):
+        form.instance.username = self.request.user
+        return super(CreateUserInfo, self).form_valid(form)
+
+# @login_required
+# def new_user_info(request):
+#     if request.method != 'POST':
+#         form = UserInfoForm()
+#     else:
+#         form = UserInfoForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             new_user_info = form.save(commit=False)
+#             new_user_info.username = request.user
+#             new_user_info.save()
+#             return redirect('souvenirs_app:index')
+#     context = {'form': form}
+#     return render(request, 'souvenirs_app/create_user_info.html', context)
 
 class UserInfoDetailView(LoginRequiredMixin, DetailView):
     model = UserInfo

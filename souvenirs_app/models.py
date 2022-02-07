@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Souvenir(models.Model):
@@ -61,9 +62,13 @@ class UserInfo(models.Model):
     country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name='userinfo', unique=False)
     city = models.CharField(max_length=30)
     address = models.TextField(max_length=200)
+    about = models.TextField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return str(self.username)
+
+    def get_absolute_url(self):
+        return reverse('user_info', args=[self.username])
 
     class Meta:
         verbose_name = 'User_information'

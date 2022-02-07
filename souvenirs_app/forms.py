@@ -13,6 +13,6 @@ class UserInfoForm(forms.ModelForm):
     date_of_birthday = forms.DateField(widget=forms.DateInput(format='%d-%m-%Y'))
     class Meta:
         model = UserInfo
-        fields = '__all__'
+        exclude = ['username']
         # widgets = {'date_of_birthday': DateInput(format='%d-%m-%Y')}
 
