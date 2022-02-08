@@ -7,7 +7,7 @@ class Souvenir(models.Model):
     """"""
 
     souvenir_id = models.AutoField(primary_key=True)
-
+    # slug = models.SlugField(max_length=30, unique=True, default='', verbose_name='URL')
     send_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='send_user')
     send_date = models.DateField(auto_now_add=True)
     receive_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receive_user')
@@ -19,7 +19,7 @@ class Souvenir(models.Model):
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Travelling')
     extra_name = models.CharField(max_length=10, default='')
-    # # slug = models.SlugField(max_length=30, default='', null=True)
+
     #
     # def save(self):
     #     super(Souvenir, self).save()
@@ -68,7 +68,7 @@ class UserInfo(models.Model):
         return str(self.username)
 
     def get_absolute_url(self):
-        return reverse('user_info', args=[self.username])
+        return reverse('souvenirs_app:user_info', args=[str(self.user_info)])
 
     class Meta:
         verbose_name = 'User_information'

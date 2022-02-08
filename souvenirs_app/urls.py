@@ -11,7 +11,7 @@ urlpatterns = [
     path('new_souvenir/', views.new_souvenir, name='new_souvenir'),
     path('create_user_info/', views.CreateUserInfo.as_view(), name='create_user_info'),
     # path('new_user_info/', views.new_user_info, name='new_user_info'),
-    path('user_info/', views.UserInfoDetailView.as_view(), name='user_info'),
+    path('user_info/<int:pk>', views.UserInfoDetailView.as_view(), name='user_info'),
     path('send_user_souvenirs/', views.SendUserSouvenirsView.as_view(), name='send_user_souvenirs'),
     path('receive_user_souvenirs/', views.ReceiveUserSouvenirsView.as_view(), name='receive_user_souvenirs'),
 ]
