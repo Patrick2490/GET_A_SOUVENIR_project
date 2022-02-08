@@ -7,7 +7,7 @@ class Souvenir(models.Model):
     """"""
 
     souvenir_id = models.AutoField(primary_key=True)
-    # slug = models.SlugField(max_length=30, unique=True, default='', verbose_name='URL')
+    slug = models.SlugField(max_length=30, unique=False, verbose_name='URL', null=True)
     send_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='send_user')
     send_date = models.DateField(auto_now_add=True)
     receive_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receive_user')
@@ -30,7 +30,8 @@ class Souvenir(models.Model):
     def __str__(self):
         return str(self.souvenir_id)
 
-
+    def get_absolute_url(self):
+        return reverse('souvenirs_app:souvenir', kwargs={'souvenir_slug': self.slug})
 
     class Meta:
         verbose_name = 'Souvenir'
@@ -43,6 +44,7 @@ class Country(models.Model):
 
     title = models.CharField(max_length=30, unique=True)
     code = models.CharField(max_length=3, unique=True)
+    slug = models.SlugField(max_length=3, unique=False, verbose_name='URL', null=True)
 
     def __str__(self):
         return self.title
@@ -55,6 +57,7 @@ class UserInfo(models.Model):
     ''''''
 
     username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    slug = models.SlugField(max_length=30, unique=False, verbose_name='URL', null=True)
     avatar = models.ImageField(upload_to='avatars/', default='no-avatar.jpg', null=True, blank=True)
     sex = models.CharField(max_length=6, choices=(('MALE', 'male'), ('FEMALE', 'female')))
     # age = models.PositiveIntegerField(default=0, null=True, blank=True)
@@ -68,7 +71,7 @@ class UserInfo(models.Model):
         return str(self.username)
 
     def get_absolute_url(self):
-        return reverse('souvenirs_app:user_info', args=[str(self.user_info)])
+        return reverse('souvenirs_app:user_info', kwargs={'user_info_slug': self.slug})
 
     class Meta:
         verbose_name = 'User_information'

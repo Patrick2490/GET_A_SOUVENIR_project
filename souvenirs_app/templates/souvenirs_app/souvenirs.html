@@ -6,7 +6,7 @@
     <ul>
         {% for souvenir in souvenirs %}
 
-            <li><a href="{% url 'souvenirs_app:souvenir' souvenir.souvenir_id %}">{{ souvenir.souvenir_id }}</a> : {{ souvenir.send_user }} to {{ souvenir.receive_user }}</li>
+            <li><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.souvenir_id }}</a> : {{ souvenir.send_user }} to {{ souvenir.receive_user }}</li>
         {% empty %}
             <li>No souvenirs have been sent yet</li>
         {% endfor %}

@@ -9,13 +9,16 @@ from . import models
 class CountryAdmin(admin.ModelAdmin):
     list_display = ('title', 'code')
     ordering = ['title']
+    prepopulated_fields = {'slug': ('code',)}
 
 @admin.register(models.UserInfo)
 class UserInfoAdmin(admin.ModelAdmin):
-    list_display = ('username', 'avatar', 'sex', 'date_of_birthday', 'country', 'city', 'address', 'about')
+    list_display = ('username', 'slug', 'avatar', 'sex', 'date_of_birthday', 'country', 'city', 'address', 'about')
     ordering = ['username']
+    prepopulated_fields = {'slug': ('username',)}
 
 @admin.register(models.Souvenir)
 class SouvenirAdmin(admin.ModelAdmin):
-    list_display = ('souvenir_id', 'extra_name','send_user', 'send_date', 'receive_user', 'receive_date', 'send_user_img', 'receive_user_img', 'status')
+    list_display = ('souvenir_id', 'extra_name', 'slug', 'send_user', 'send_date', 'receive_user', 'receive_date', 'send_user_img', 'receive_user_img', 'status')
     ordering = ['souvenir_id']
+    prepopulated_fields = {'slug': ('extra_name',)}

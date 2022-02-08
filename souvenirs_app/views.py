@@ -25,7 +25,8 @@ class SouvenirsView(ListView):
 
 class SouvenirView(DetailView):
     model = Souvenir
-    pk_url_kwarg = 'souvenir_id'
+    # pk_url_kwarg = 'souvenir_id'
+    slug_url_kwarg = 'souvenir_slug'
     context_object_name = 'souvenir'
     # souvenir = Souvenir.objects.get(souvenir_id=pk)
     template_name = 'souvenirs_app/souvenir.html'
@@ -65,9 +66,11 @@ def new_souvenir(request):
         form = SouvenirForm(request.POST, request.FILES)
         if form.is_valid():
             new_souvenir = form.save(commit=False)
+            # new_souvenir.souvenir_id = souvenir_id
             new_souvenir.send_user = request.user
             new_souvenir.receive_user = random.choice(User.objects.exclude(username=request.user).exclude(username='admin'))
             new_souvenir.extra_name = f'{new_souvenir.send_user}-{UserInfo.objects.get(username=request.user).country.code}'
+            new_souvenir.slug = f'{new_souvenir.extra_name}{new_souvenir.souvenir_id}'
             new_souvenir.save()
             return redirect('souvenirs_app:souvenirs')
     context = {'form': form}
@@ -82,6 +85,7 @@ class CreateUserInfo(CreateView):
 
     def form_valid(self, form):
         form.instance.username = self.request.user
+        form.instance.slug = form.instance.username.username
         return super(CreateUserInfo, self).form_valid(form)
 
 # @login_required

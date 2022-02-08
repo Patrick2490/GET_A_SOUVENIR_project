@@ -11,8 +11,9 @@ class SouvenirForm(forms.ModelForm):
 
 class UserInfoForm(forms.ModelForm):
     date_of_birthday = forms.DateField(widget=forms.DateInput(format='%d-%m-%Y'))
+    # slug = forms.SlugField()
     class Meta:
         model = UserInfo
-        exclude = ['username']
+        exclude = ['username', 'slug']
         # widgets = {'date_of_birthday': DateInput(format='%d-%m-%Y')}
 

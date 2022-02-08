@@ -22,7 +22,7 @@
 </p>
 {% if user.is_authenticated %}
     Hello, {{ user.username }}!
-    <a href="{{ user.get_absolute_url }}">USER INFORMATION</a>
+    <a href="{{ user_info.get_absolute_url }}">USER INFORMATION</a>
     <p>
         <a href="{% url 'users:logout' %}">Log out</a>
     </p>
