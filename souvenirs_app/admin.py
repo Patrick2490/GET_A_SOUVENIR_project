@@ -19,6 +19,5 @@ class UserInfoAdmin(admin.ModelAdmin):
 
 @admin.register(models.Souvenir)
 class SouvenirAdmin(admin.ModelAdmin):
-    list_display = ('souvenir_id', 'extra_name', 'slug', 'send_user', 'send_date', 'receive_user', 'receive_date', 'send_user_img', 'receive_user_img', 'status')
+    list_display = ('souvenir_id', 'slug', 'send_user', 'send_date', 'receive_user', 'receive_date', 'send_user_img', 'receive_user_img', 'status')
     ordering = ['souvenir_id']
-    prepopulated_fields = {'slug': ('extra_name',)}

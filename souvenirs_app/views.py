@@ -69,15 +69,14 @@ def new_souvenir(request):
             # new_souvenir.souvenir_id = souvenir_id
             new_souvenir.send_user = request.user
             new_souvenir.receive_user = random.choice(User.objects.exclude(username=request.user).exclude(username='admin'))
-            new_souvenir.extra_name = f'{new_souvenir.send_user}-{UserInfo.objects.get(username=request.user).country.code}'
-            new_souvenir.slug = f'{new_souvenir.extra_name}{new_souvenir.souvenir_id}'
+            new_souvenir.slug = f'{new_souvenir.send_user}-{UserInfo.objects.get(username=request.user).country.code}'
             new_souvenir.save()
             return redirect('souvenirs_app:souvenirs')
     context = {'form': form}
     return render(request, 'souvenirs_app/new_souvenir.html', context)
 
 
-class CreateUserInfo(CreateView):
+class CreateUserInfo(LoginRequiredMixin, CreateView):
     model = UserInfo
     form_class = UserInfoForm
     template_name = 'souvenirs_app/create_user_info.html'
@@ -85,7 +84,7 @@ class CreateUserInfo(CreateView):
 
     def form_valid(self, form):
         form.instance.username = self.request.user
-        form.instance.slug = form.instance.username.username
+        # form.instance.slug = form.instance.username.username
         return super(CreateUserInfo, self).form_valid(form)
 
 # @login_required
@@ -106,6 +105,7 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
     model = UserInfo
     template_name = 'souvenirs_app/user_info.html'
     context_object_name = 'user_info'
+    slug_url_kwarg = 'user_info_slug'
 
     def get_object(self, queryset=None):
         return UserInfo.objects.get(username=self.request.user)

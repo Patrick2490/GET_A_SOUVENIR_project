@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 class Souvenir(models.Model):
@@ -18,7 +19,6 @@ class Souvenir(models.Model):
     STATUS_CHOICES = (('TR', 'Travelling'), ('RCV', 'Received'))
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Travelling')
-    extra_name = models.CharField(max_length=10, default='')
 
     #
     # def save(self):
@@ -60,7 +60,6 @@ class UserInfo(models.Model):
     slug = models.SlugField(max_length=30, unique=False, verbose_name='URL', null=True)
     avatar = models.ImageField(upload_to='avatars/', default='no-avatar.jpg', null=True, blank=True)
     sex = models.CharField(max_length=6, choices=(('MALE', 'male'), ('FEMALE', 'female')))
-    # age = models.PositiveIntegerField(default=0, null=True, blank=True)
     date_of_birthday = models.DateField(null=True, blank=True)
     country = models.ForeignKey(Country, on_delete=models.PROTECT, related_name='userinfo', unique=False)
     city = models.CharField(max_length=30)
@@ -72,6 +71,10 @@ class UserInfo(models.Model):
 
     def get_absolute_url(self):
         return reverse('souvenirs_app:user_info', kwargs={'user_info_slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(UserInfo, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'User_information'
