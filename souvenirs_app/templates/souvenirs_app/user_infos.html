@@ -1,0 +1,17 @@
+{% extends 'souvenirs_app/base.html' %}
+
+{% block content %}
+    <h2>USERS</h2>
+
+    <ul>
+        {% for user_info in user_infos %}
+
+            <li><a href="{{ user_info.get_absolute_url }}">{{ user_info.username }}</a></li>
+        {% empty %}
+            <li>No user have been register yet</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'souvenirs_app:new_souvenir' %}">Send another souvenir</a>
+
+{% endblock content %}
