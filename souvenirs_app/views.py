@@ -62,24 +62,38 @@ class ReceiveUserSouvenirsView(LoginRequiredMixin, ListView):
         return Souvenir.objects.filter(receive_user=self.request.user)
 
 
-@login_required
-def new_souvenir(request):
-    if request.method != 'POST':
-        form = SouvenirForm()
-    else:
-        form = SouvenirForm(request.POST, request.FILES)
-        if form.is_valid():
-            new_souvenir = form.save(commit=False)
-            # new_souvenir.souvenir_id = souvenir_id
-            new_souvenir.send_user = request.user
-            new_souvenir.receive_user = random.choice(User.objects.exclude(username=request.user).exclude(username='admin'))
-            new_souvenir.slug = f'{UserInfo.objects.get(username=new_souvenir.send_user).country.code}--{UserInfo.objects.get(username=new_souvenir.receive_user).country.code}'
-            print(new_souvenir.slug)
-            print(new_souvenir.souvenir_id, Souvenir.objects.get(souvenir_id=new_souvenir))
-            new_souvenir.save()
-            return redirect('souvenirs_app:souvenirs')
-    context = {'form': form}
-    return render(request, 'souvenirs_app/new_souvenir.html', context)
+class CreateSouvenir(LoginRequiredMixin, CreateView):
+    model = Souvenir
+    form_class = SouvenirForm
+    template_name = 'souvenirs_app/create_souvenir.html'
+    context_object_name = 'create_souvenir'
+
+    def form_valid(self, form):
+        form.instance.send_user = self.request.user
+        form.instance.receive_user = random.choice(User.objects.exclude(username=self.request.user).exclude(username='admin'))
+        random_number = str(random.randint(0, 99999)).zfill(5)
+        form.instance.slug = f'{UserInfo.objects.get(username=form.instance.send_user).country.code}{random_number}{UserInfo.objects.get(username=form.instance.receive_user).country.code}'
+        return super(CreateSouvenir, self).form_valid(form)
+
+
+# @login_required
+# def new_souvenir(request):
+#     if request.method != 'POST':
+#         form = SouvenirForm()
+#     else:
+#         form = SouvenirForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             new_souvenir = form.save(commit=False)
+#             # new_souvenir.souvenir_id = souvenir_id
+#             new_souvenir.send_user = request.user
+#             new_souvenir.receive_user = random.choice(User.objects.exclude(username=request.user).exclude(username='admin'))
+#             new_souvenir.slug = f'{UserInfo.objects.get(username=new_souvenir.send_user).country.code}--{UserInfo.objects.get(username=new_souvenir.receive_user).country.code}'
+#             print(new_souvenir.slug)
+#             print(new_souvenir.souvenir_id, Souvenir.objects.get(souvenir_id=new_souvenir))
+#             new_souvenir.save()
+#             return redirect('souvenirs_app:souvenirs')
+#     context = {'form': form}
+#     return render(request, 'souvenirs_app/create_souvenir.html', context)
 
 
 class CreateUserInfo(LoginRequiredMixin, CreateView):

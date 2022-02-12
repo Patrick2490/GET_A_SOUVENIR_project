@@ -4,7 +4,7 @@
 
     <h4>Send a souvenir</h4>
 
-    <form action="{% url 'souvenirs_app:new_souvenir' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'souvenirs_app:create_souvenir' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
     <button name="submit">send souvenir</button>
