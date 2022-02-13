@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.utils.text import slugify
 
 from django.contrib.auth.models import User
@@ -108,6 +108,16 @@ class CreateUserInfo(LoginRequiredMixin, CreateView):
         form.instance.username = self.request.user
         form.instance.slug = slugify(form.instance.username.username)
         return super(CreateUserInfo, self).form_valid(form)
+
+
+class UpdateUserInfo(LoginRequiredMixin, UpdateView):
+    model = UserInfo
+    form_class = UserInfoForm
+    template_name = 'souvenirs_app/update_user_info.html'
+
+    def get_object(self, queryset=None):
+        return UserInfo.objects.get(username=self.request.user)
+
 
 # @login_required
 # def new_user_info(request):

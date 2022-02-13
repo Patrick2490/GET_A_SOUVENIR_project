@@ -4,10 +4,10 @@
     <h3>YOUR USERNAME: {{ user.get_username }}</h3>
     <h4>Fill in the fields</h4>
 
-    <form action="{% url 'souvenirs_app:create_user_info' %}" method="post" enctype="multipart/form-data">
+    <form action="{{ userinfo.get_absolute_url }}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-    <button name="submit">save</button>
+    <input type="submit" value="Update"/>
     </form>
 
 
