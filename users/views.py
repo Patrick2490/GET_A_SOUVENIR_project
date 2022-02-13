@@ -1,3 +1,5 @@
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
@@ -10,6 +12,15 @@ class RegisterUser(CreateView):
     form_class = RegisterUserForm
     template_name = 'registration/register.html'
     success_url = reverse_lazy('users:login')
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'registration/login.html'
+
+    # def get_success_url(self):
+    #     return reverse_lazy('souvenirs_app:index')
+
+
 
 # def register(request):
 #     '''register new user'''

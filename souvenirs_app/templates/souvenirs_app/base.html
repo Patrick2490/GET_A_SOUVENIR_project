@@ -24,7 +24,7 @@
     <a href="{%  url 'souvenirs_app:receive_user_souvenirs' %}">Received Souvenirs</a>
 </p>
 {% if user.is_authenticated %}
-    Hello, {{ user.username }}!
+    Hello, {{ user.get_username }}!
     <a href="{% url 'souvenirs_app:user_info' request.user %}">USER INFORMATION</a>
     <p>
         <a href="{% url 'users:logout' %}">Log out</a>
