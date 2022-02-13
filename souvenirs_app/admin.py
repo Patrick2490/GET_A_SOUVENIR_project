@@ -7,7 +7,7 @@ from . import models
 
 @admin.register(models.Country)
 class CountryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'code')
+    list_display = ('title', 'code', 'slug')
     ordering = ['title']
     prepopulated_fields = {'slug': ('code',)}
 

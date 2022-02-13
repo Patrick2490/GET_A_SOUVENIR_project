@@ -5,11 +5,11 @@
 
     <ul>
         {% for souvenir in souvenirs %}
-
-            <li><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.souvenir_id }}</a> :
-                {% for user_info in user_infos %}
-                    <a href="{% url 'souvenirs_app:user_info' souvenir.send_user %}">{{ souvenir.send_user }}</a>
-                {% endfor %}
+            <li><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.souvenir_id }}</a>:
+                by
+                <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
+                to
+                <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
         {% empty %}
             <li>No souvenirs have been sent yet</li>
         {% endfor %}

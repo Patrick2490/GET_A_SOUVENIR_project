@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView
+from django.utils.text import slugify
 
 from django.contrib.auth.models import User
 from .models import Souvenir, UserInfo, Country
@@ -50,7 +51,7 @@ class SendUserSouvenirsView(LoginRequiredMixin, ListView):
     context_object_name = 'send_user_souvenirs'
 
     def get_queryset(self):
-        return Souvenir.objects.filter(send_user=self.request.user)
+        return Souvenir.objects.filter(send_user__slug=self.request.user)
 
 
 class ReceiveUserSouvenirsView(LoginRequiredMixin, ListView):
@@ -59,7 +60,7 @@ class ReceiveUserSouvenirsView(LoginRequiredMixin, ListView):
     context_object_name = 'receive_user_souvenirs'
 
     def get_queryset(self):
-        return Souvenir.objects.filter(receive_user=self.request.user)
+        return Souvenir.objects.filter(receive_user__slug=self.request.user)
 
 
 class CreateSouvenir(LoginRequiredMixin, CreateView):
@@ -69,8 +70,9 @@ class CreateSouvenir(LoginRequiredMixin, CreateView):
     context_object_name = 'create_souvenir'
 
     def form_valid(self, form):
-        form.instance.send_user = self.request.user
-        form.instance.receive_user = random.choice(User.objects.exclude(username=self.request.user).exclude(username='admin'))
+        form.instance.send_user = UserInfo.objects.get(username=self.request.user)
+        form.instance.receive_user = random.choice(UserInfo.objects.exclude(username=self.request.user))
+        print(form.instance.send_user, form.instance.receive_user)
         random_number = str(random.randint(0, 99999)).zfill(5)
         form.instance.slug = f'{UserInfo.objects.get(username=form.instance.send_user).country.code}{random_number}{UserInfo.objects.get(username=form.instance.receive_user).country.code}'
         return super(CreateSouvenir, self).form_valid(form)
@@ -104,7 +106,7 @@ class CreateUserInfo(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.username = self.request.user
-        # form.instance.slug = form.instance.username.username
+        form.instance.slug = slugify(form.instance.username.username)
         return super(CreateUserInfo, self).form_valid(form)
 
 # @login_required

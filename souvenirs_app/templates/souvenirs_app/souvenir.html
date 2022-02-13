@@ -1,7 +1,11 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
-    <h2>Souvenir #{{ souvenir.souvenir_id }} sent by {{ souvenir.send_user }} to {{ souvenir.receive_user }} on {{ souvenir.send_date }}</h2>
+    <h2>Souvenir #{{ souvenir.souvenir_id }}
+        sent by
+        <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
+        to
+        <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
     <h3>Status: {{ souvenir.status }}</h3>
     {% if souvenir.receive_user_img %}
         <img src="{{ souvenir.receive_user_img.url }}" alt="img">
