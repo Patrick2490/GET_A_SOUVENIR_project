@@ -25,7 +25,7 @@
 </p>
 {% if user.is_authenticated %}
     Hello, {{ user.get_username }}!
-    <a href="{% url 'souvenirs_app:user_info' request.user %}">USER INFORMATION</a>
+    <a href="{% url 'souvenirs_app:update_user_info' request.user %}">USER INFORMATION</a>
     <p>
         <a href="{% url 'users:logout' %}">Log out</a>
     </p>

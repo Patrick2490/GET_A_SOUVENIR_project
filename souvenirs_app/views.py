@@ -1,6 +1,8 @@
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.utils.text import slugify
 
@@ -95,7 +97,7 @@ class CreateSouvenir(LoginRequiredMixin, CreateView):
 #             new_souvenir.save()
 #             return redirect('souvenirs_app:souvenirs')
 #     context = {'form': form}
-#     return render(request, 'souvenirs_app/create_souvenir.html', context)
+#     v, context)
 
 
 class CreateUserInfo(LoginRequiredMixin, CreateView):
@@ -117,7 +119,10 @@ class UpdateUserInfo(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return UserInfo.objects.get(username=self.request.user)
-
+        # if UserInfo.DoesNotExist:
+        #     return HttpResponseRedirect(reverse('souvenirs_app:create_user_info'))
+        # else:
+        #     return object
 
 # @login_required
 # def new_user_info(request):

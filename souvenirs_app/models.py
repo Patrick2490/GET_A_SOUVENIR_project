@@ -21,7 +21,7 @@ class Country(models.Model):
 class UserInfo(models.Model):
     ''''''
 
-    username = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    username = models.OneToOneField(User, on_delete=models.PROTECT, primary_key=True)
     slug = models.SlugField(max_length=30, verbose_name='URL')
     avatar = models.ImageField(upload_to='avatars/', default='no-avatar.jpg', null=True, blank=True)
     sex = models.CharField(max_length=6, choices=(('MALE', 'male'), ('FEMALE', 'female')))
@@ -51,9 +51,9 @@ class Souvenir(models.Model):
 
     souvenir_id = models.AutoField(primary_key=True)
     slug = models.SlugField(max_length=30, verbose_name='URL')
-    send_user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name='send_user')
+    send_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='send_user')
     send_date = models.DateField(auto_now_add=True)
-    receive_user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name='receive_user')
+    receive_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='receive_user')
     receive_date = models.DateField(auto_now=True)
     send_user_img = models.ImageField(upload_to='send/', default='no-photo.png', null=True, blank=True)
     receive_user_img = models.ImageField(upload_to='receive/', default='no-photo.png', null=True, blank=True)

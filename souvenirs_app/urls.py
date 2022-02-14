@@ -11,10 +11,10 @@ urlpatterns = [
     path('create_souvenir/', views.CreateSouvenir.as_view(), name='create_souvenir'),
     # path('new_souvenir/', views.new_souvenir, name='new_souvenir'),
     path('create_user_info/', views.CreateUserInfo.as_view(), name='create_user_info'),
-    path('update_user_info/<slug:user_info_slug>', views.UpdateUserInfo.as_view(), name='update_user_info'),
+    path('update_user_info/<slug:user_info_slug>/', views.UpdateUserInfo.as_view(), name='update_user_info'),
     # path('new_user_info/', views.new_user_info, name='new_user_info'),
     path('user_infos/', views.UserInfoListView.as_view(), name='user_infos'),
-    path('user_info/<slug:user_info_slug>', views.UserInfoDetailView.as_view(), name='user_info'),
+    path('user_info/<slug:user_info_slug>/', views.UserInfoDetailView.as_view(), name='user_info'),
     path('send_user_souvenirs/', views.SendUserSouvenirsView.as_view(), name='send_user_souvenirs'),
     path('receive_user_souvenirs/', views.ReceiveUserSouvenirsView.as_view(), name='receive_user_souvenirs'),
 ]
