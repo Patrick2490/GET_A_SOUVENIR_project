@@ -37,6 +37,7 @@ class SouvenirView(DetailView):
     # souvenir = Souvenir.objects.get(souvenir_id=pk)
     template_name = 'souvenirs_app/souvenir.html'
 
+
 # @login_required
 # def souvenir(request, souvenir_id):
 #     souvenir = Souvenir.objects.get(souvenir_id=souvenir_id)
@@ -117,12 +118,20 @@ class UpdateUserInfo(LoginRequiredMixin, UpdateView):
     form_class = UserInfoForm
     template_name = 'souvenirs_app/update_user_info.html'
 
+    def get(self, request, **kwargs):
+        try:
+            self.model.objects.get(username=self.request.user)
+            return super(UpdateUserInfo, self).get(request, **kwargs)
+        except self.model.DoesNotExist:
+            return redirect(reverse('souvenirs_app:create_user_info'))
+
     def get_object(self, queryset=None):
         return UserInfo.objects.get(username=self.request.user)
         # if UserInfo.DoesNotExist:
         #     return HttpResponseRedirect(reverse('souvenirs_app:create_user_info'))
         # else:
         #     return object
+
 
 # @login_required
 # def new_user_info(request):
@@ -151,26 +160,24 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'user_info'
     slug_url_kwarg = 'user_info_slug'
 
+
 class MyInfoDetailView(UserInfoDetailView):
 
     def get(self, request, **kwargs):
         try:
             self.model.objects.get(username=self.request.user)
-            return super(MyInfoDetailView, self).get(request, **kwargs)
+            return super(UserInfoDetailView, self).get(request, **kwargs)
         except self.model.DoesNotExist:
             return redirect(reverse('souvenirs_app:create_user_info'))
 
     # def get_object(self, queryset=None):
     #     return UserInfo.objects.get(username=self.request.user)
 
-
     # def get(self, request):
     #     my_user_info = UserInfo.objects.get(slug=self.request.user)
     #     return render(request, 'souvenirs_app/user_info.html', {'my_user_info': my_user_info})
 
-
 # for generating code
 # str(n).zfill(4)
 # f'{n:04}'
-
 

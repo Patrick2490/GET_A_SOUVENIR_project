@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +9,9 @@
     <a href="{% url 'souvenirs_app:index' %}">GET A SOUVENIR</a>
 </header>
 <body>
-{#<p>#}
-{#    <a href="{% url 'souvenirs_app:create_user_info' %}">Fill the information about you</a>#}
-{#</p>#}
+<!-- <p>
+    <a href="{% url 'souvenirs_app:create_user_info' %}">Fill the information about you</a>
+</p> -->
 <p>
     <a href="{%  url 'souvenirs_app:souvenirs' %}">Souvenirs</a>
 </p>
@@ -25,9 +26,9 @@
 </p>
 {% if user.is_authenticated %}
     Hello, {{ user.get_username }}!
-    <a href="{% url 'souvenirs_app:my_info' request.user %}">USER INFORMATION</a>
-{#    <a href="{% url 'souvenirs_app:user_info' request.user %}">USER INFORMATION</a>#}
-{#    <a href="{% url 'souvenirs_app:update_user_info' request.user %}">USER INFORMATION</a>#}
+    <!-- <a href="{% url 'souvenirs_app:user_info' request.user %}">user_info</a> -->
+    <p><a href="{% url 'souvenirs_app:my_info' request.user %}">my_info</a></p>
+    <p><a href="{% url 'souvenirs_app:update_user_info' request.user %}">update_user_info</a></p>
     <p>
         <a href="{% url 'users:logout' %}">Log out</a>
     </p>
