@@ -15,6 +15,7 @@ urlpatterns = [
     # path('new_user_info/', views.new_user_info, name='new_user_info'),
     path('user_infos/', views.UserInfoListView.as_view(), name='user_infos'),
     path('user_info/<slug:user_info_slug>/', views.UserInfoDetailView.as_view(), name='user_info'),
+    path('my_info/<slug:user_info_slug>/', views.MyInfoDetailView.as_view(), name='my_info'),
     path('send_user_souvenirs/', views.SendUserSouvenirsView.as_view(), name='send_user_souvenirs'),
     path('receive_user_souvenirs/', views.ReceiveUserSouvenirsView.as_view(), name='receive_user_souvenirs'),
 ]

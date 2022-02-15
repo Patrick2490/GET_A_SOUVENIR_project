@@ -151,6 +151,15 @@ class UserInfoDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'user_info'
     slug_url_kwarg = 'user_info_slug'
 
+class MyInfoDetailView(UserInfoDetailView):
+
+    def get(self, request, **kwargs):
+        try:
+            self.model.objects.get(username=self.request.user)
+            return super(MyInfoDetailView, self).get(request, **kwargs)
+        except self.model.DoesNotExist:
+            return redirect(reverse('souvenirs_app:create_user_info'))
+
     # def get_object(self, queryset=None):
     #     return UserInfo.objects.get(username=self.request.user)
 
