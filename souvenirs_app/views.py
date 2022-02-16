@@ -23,12 +23,6 @@ class SouvenirsView(ListView):
     context_object_name = 'souvenirs'
 
 
-# def souvenirs(request):
-#     souvenirs = Souvenir.objects.order_by('souvenir_id')
-#     context = {'souvenirs': souvenirs}
-#     return render(request, 'souvenirs_app/souvenirs.html', context)
-
-
 class SouvenirView(DetailView):
     model = Souvenir
     # pk_url_kwarg = 'souvenir_id'
@@ -36,16 +30,6 @@ class SouvenirView(DetailView):
     context_object_name = 'souvenir'
     # souvenir = Souvenir.objects.get(souvenir_id=pk)
     template_name = 'souvenirs_app/souvenir.html'
-
-
-# @login_required
-# def souvenir(request, souvenir_id):
-#     souvenir = Souvenir.objects.get(souvenir_id=souvenir_id)
-#     details = f'Souvenir #{souvenir.souvenir_id} sent by {souvenir.send_user} to {souvenir.receive_user} on {souvenir.send_date}'
-#     status = souvenir.status
-#     image = souvenir.receive_user_img
-#     context = {'souvenir_details': details, 'souvenir_status': status, 'souvenir_image': image}
-#     return render(request, 'souvenirs_app/souvenir.html', context)
 
 
 class SendUserSouvenirsView(LoginRequiredMixin, ListView):
@@ -77,28 +61,10 @@ class CreateSouvenir(LoginRequiredMixin, CreateView):
         form.instance.receive_user = random.choice(UserInfo.objects.exclude(username=self.request.user))
         print(form.instance.send_user, form.instance.receive_user)
         random_number = str(random.randint(0, 99999)).zfill(5)
-        form.instance.slug = f'{UserInfo.objects.get(username=form.instance.send_user).country.code}{random_number}{UserInfo.objects.get(username=form.instance.receive_user).country.code}'
+        form.instance.slug = f'{UserInfo.objects.get(username=form.instance.send_user).country.code}' \
+                             f'{random_number}' \
+                             f'{UserInfo.objects.get(username=form.instance.receive_user).country.code}'
         return super(CreateSouvenir, self).form_valid(form)
-
-
-# @login_required
-# def new_souvenir(request):
-#     if request.method != 'POST':
-#         form = SouvenirForm()
-#     else:
-#         form = SouvenirForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             new_souvenir = form.save(commit=False)
-#             # new_souvenir.souvenir_id = souvenir_id
-#             new_souvenir.send_user = request.user
-#             new_souvenir.receive_user = random.choice(User.objects.exclude(username=request.user).exclude(username='admin'))
-#             new_souvenir.slug = f'{UserInfo.objects.get(username=new_souvenir.send_user).country.code}--{UserInfo.objects.get(username=new_souvenir.receive_user).country.code}'
-#             print(new_souvenir.slug)
-#             print(new_souvenir.souvenir_id, Souvenir.objects.get(souvenir_id=new_souvenir))
-#             new_souvenir.save()
-#             return redirect('souvenirs_app:souvenirs')
-#     context = {'form': form}
-#     v, context)
 
 
 class CreateUserInfo(LoginRequiredMixin, CreateView):
@@ -127,25 +93,6 @@ class UpdateUserInfo(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return UserInfo.objects.get(username=self.request.user)
-        # if UserInfo.DoesNotExist:
-        #     return HttpResponseRedirect(reverse('souvenirs_app:create_user_info'))
-        # else:
-        #     return object
-
-
-# @login_required
-# def new_user_info(request):
-#     if request.method != 'POST':
-#         form = UserInfoForm()
-#     else:
-#         form = UserInfoForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             new_user_info = form.save(commit=False)
-#             new_user_info.username = request.user
-#             new_user_info.save()
-#             return redirect('souvenirs_app:index')
-#     context = {'form': form}
-#     return render(request, 'souvenirs_app/create_user_info.html', context)
 
 
 class UserInfoListView(ListView):
@@ -170,14 +117,5 @@ class MyInfoDetailView(UserInfoDetailView):
         except self.model.DoesNotExist:
             return redirect(reverse('souvenirs_app:create_user_info'))
 
-    # def get_object(self, queryset=None):
-    #     return UserInfo.objects.get(username=self.request.user)
-
-    # def get(self, request):
-    #     my_user_info = UserInfo.objects.get(slug=self.request.user)
-    #     return render(request, 'souvenirs_app/user_info.html', {'my_user_info': my_user_info})
-
-# for generating code
-# str(n).zfill(4)
-# f'{n:04}'
-
+    def get_object(self, queryset=None):
+        return UserInfo.objects.get(username=self.request.user)
