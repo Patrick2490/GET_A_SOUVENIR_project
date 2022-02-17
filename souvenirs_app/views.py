@@ -38,7 +38,7 @@ class SendUserSouvenirsView(LoginRequiredMixin, ListView):
     context_object_name = 'send_user_souvenirs'
 
     def get_queryset(self):
-        return Souvenir.objects.filter(send_user__slug=self.request.user)
+        return Souvenir.objects.filter(send_user__slug=slugify(self.request.user))
 
 
 class ReceiveUserSouvenirsView(LoginRequiredMixin, ListView):
@@ -47,7 +47,7 @@ class ReceiveUserSouvenirsView(LoginRequiredMixin, ListView):
     context_object_name = 'receive_user_souvenirs'
 
     def get_queryset(self):
-        return Souvenir.objects.filter(receive_user__slug=self.request.user)
+        return Souvenir.objects.filter(receive_user__slug=slugify(self.request.user))
 
 
 class CreateSouvenir(LoginRequiredMixin, CreateView):
