@@ -11,6 +11,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from .models import Souvenir, UserInfo, Country
 from .forms import CreateSouvenirForm, UpdateSouvenirForm, UserInfoForm
+from .permissions import SendUserChangePermissionMixin
 
 import random
 
@@ -44,14 +45,13 @@ class CreateSouvenir(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.send_user = UserInfo.objects.get(username=self.request.user)
         form.instance.receive_user = random.choice(UserInfo.objects.exclude(username=self.request.user))
-        # form.instance.status = 'Travelling'
         random_number = str(random.randint(0, 99999)).zfill(5)
         form.instance.slug = f'{UserInfo.objects.get(username=form.instance.send_user).country.code}' \
                              f'{random_number}' \
                              f'{UserInfo.objects.get(username=form.instance.receive_user).country.code}'
         return super(CreateSouvenir, self).form_valid(form)
 
-class UpdateSouvenir(UpdateView):
+class UpdateSouvenir(SendUserChangePermissionMixin, UpdateView):
 
     # permission_required = 'souvenirs_app.change_souvenir'
     model = Souvenir
@@ -62,14 +62,14 @@ class UpdateSouvenir(UpdateView):
     # def has_permission(self):
     #     print(get_object().receive_user == request)
     #     return True
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        print(self.object.send_user.username, self.get_object(), request.user)
-        if self.object.send_user.username == request.user:
-            return super().post(request, *args, **kwargs)
-        else:
-            return HttpResponseRedirect('/')
+    #
+    # def post(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     print(self.object.send_user.username, self.get_object(), request.user)
+    #     if self.object.send_user.username == request.user:
+    #         return super().post(request, *args, **kwargs)
+    #     else:
+    #         return Http404
 
 
 class SendUserSouvenirsView(LoginRequiredMixin, ListView):
