@@ -1,7 +1,8 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
-    <h2>USERS</h2>
+
+    <h3>THERE A {{ user_infos.count }} ACTIVE USERS ON THE WEBSITE</h3>
 
     <ul>
         {% for user_info in user_infos %}

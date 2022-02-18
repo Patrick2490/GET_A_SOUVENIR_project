@@ -1,0 +1,11 @@
+{% extends 'souvenirs_app/base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'souvenirs_app:update_souvenir' souvenir.slug %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button name="submit">UPDATE</button>
+    </form>
+
+{% endblock content %}

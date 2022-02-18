@@ -1,11 +1,14 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
+
     <h2>Received souvenirs</h2>
+
+    <p>YOU RECEIVED {{ receive_user_souvenirs.count }} SOUVENIRS</p>
 
     <ul>
         {% for souvenir in receive_user_souvenirs %}
-             <li><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.souvenir_id }}</a>:
+             <li><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.slug }}</a>:
                 by
                 <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
                 to
@@ -15,6 +18,6 @@
         {% endfor %}
     </ul>
 
-    <a href="{% url 'souvenirs_app:create_souvenir' %}">Send another souvenir</a>
+    <a href="{% url 'souvenirs_app:create_souvenir' %}">Send a souvenir</a>
 
 {% endblock content %}

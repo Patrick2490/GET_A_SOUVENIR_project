@@ -59,9 +59,11 @@ class Souvenir(models.Model):
     receive_user_img = models.ImageField(upload_to='receive/', default='no-photo.png', null=True, blank=True)
     message = models.TextField(max_length=500, null=True, blank=True)
 
-    STATUS_CHOICES = (('TR', 'Travelling'), ('RCV', 'Received'))
-
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Travelling')
+    STATUS_CHOICES = [
+        ('ON THE WAY', 'On the way'),
+        ('RECEIVED', 'Received'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ON THE WAY')
 
     # def save(self):
     #     super(Souvenir, self).save()

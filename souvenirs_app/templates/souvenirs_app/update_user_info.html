@@ -1,6 +1,7 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
+
     <h3>YOUR USERNAME: {{ user.get_username }}</h3>
     <h4>Fill in the fields</h4>
 
@@ -9,6 +10,5 @@
         {{ form.as_p }}
     <input type="submit" value="Update"/>
     </form>
-
 
 {% endblock content %}

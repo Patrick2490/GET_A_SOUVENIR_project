@@ -2,12 +2,19 @@
 
 {% block content %}
 
-    <h4>Send a souvenir</h4>
+    <h1>Dear {{ user.get_username }}!</h1>
+
+    <h3>Before sending a souvenir to a random recipient, please read the following information!</h3>
+
+    <h4>When you press the button, a person who doesn`t live in your country will be randomly selected.
+    It is to him that you will send your souvenir, indicating the unique identifier
+
+    <p>Remember that this project is for honest people. Please don't click send a souvenir if you're not going to do it!</p></h4>
 
     <form action="{% url 'souvenirs_app:create_souvenir' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-    <button name="submit">send souvenir</button>
+    <button name="submit">LET`S GO !</button>
     </form>
 
 {% endblock content %}

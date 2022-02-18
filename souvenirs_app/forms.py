@@ -2,11 +2,15 @@ from django import forms
 from django.forms import DateInput
 from .models import Souvenir, UserInfo
 
-class SouvenirForm(forms.ModelForm):
+class CreateSouvenirForm(forms.ModelForm):
     class Meta:
         model = Souvenir
-        fields = ['souvenir_id', 'send_user_img', 'receive_user_img']
+        fields = ['message']
 
+class UpdateSouvenirForm(forms.ModelForm):
+    class Meta:
+        model = Souvenir
+        fields = ['message', 'send_user_img', 'receive_user_img']
 
 
 class UserInfoForm(forms.ModelForm):
@@ -16,4 +20,3 @@ class UserInfoForm(forms.ModelForm):
         model = UserInfo
         exclude = ['username', 'slug']
         # widgets = {'date_of_birthday': DateInput(format='%d-%m-%Y')}
-

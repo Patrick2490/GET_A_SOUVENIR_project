@@ -1,7 +1,8 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
-    <h2>Souvenir #{{ souvenir.souvenir_id }}
+
+    <h2>Souvenir {{ souvenir.slug }}
         sent by
         <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
         to
@@ -12,9 +13,7 @@
     {% else %}
         <p></p>
     {% endif %}
-{% endblock content %}
 
-{#another version of view#}
-{#    {% for img in souvenir_image %}#}
-{#        <img src="{{ img.url }}" alt="img">#}
-{#    {% endfor %}#}
+    <p><a href="{% url 'souvenirs_app:update_souvenir' souvenir.slug %}">Update souvenir</a></p>
+
+{% endblock content %}
