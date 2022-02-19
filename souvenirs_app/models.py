@@ -72,7 +72,7 @@ class Souvenir(models.Model):
     def get_absolute_url(self):
         return reverse('souvenirs_app:souvenir', kwargs={'souvenir_slug': self.slug})
 
-    def travelling(self):
+    def on_the_way(self):
         return f'{(self.receive_date - self.send_date).days} days'
 
     class Meta:

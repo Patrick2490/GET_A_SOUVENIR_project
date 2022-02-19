@@ -16,7 +16,7 @@ class UpdateSouvenirBySendUserForm(forms.ModelForm):
 class UpdateSouvenirByReceiveUserForm(forms.ModelForm):
     class Meta:
         model = Souvenir
-        fields = ['receive_user_message', 'receive_user_img', 'status']
+        fields = ['receive_user_message', 'receive_user_img']
 
 
 class UserInfoForm(forms.ModelForm):

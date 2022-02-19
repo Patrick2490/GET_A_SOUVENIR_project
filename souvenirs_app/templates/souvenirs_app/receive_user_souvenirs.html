@@ -13,6 +13,8 @@
                 <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
                 to
                 <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
+                {{ souvenir.status }}
+                {{ souvenir.on_the_way }}
         {% empty %}
             <li>No souvenirs have been received yet</li>
         {% endfor %}

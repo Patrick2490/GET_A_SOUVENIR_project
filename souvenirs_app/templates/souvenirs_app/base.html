@@ -18,6 +18,9 @@
     <a href="{%  url 'souvenirs_app:send_user_souvenirs' %}">Sent Souvenirs</a>
 </p>
 <p>
+    <a href="{%  url 'souvenirs_app:on_the_way_user_souvenirs' %}">Souvenirs on the way</a>
+</p>
+<p>
     <a href="{%  url 'souvenirs_app:receive_user_souvenirs' %}">Received Souvenirs</a>
 </p>
 {% if user.is_authenticated %}
@@ -35,7 +38,7 @@
 {% block content %}{% endblock content %}
 <p>
     <form action="{% url 'souvenirs_app:search_souvenir' %}" method="get" class="d-flex editContent">
-        <input type="search" placeholder="Enter ID..." name="search" class="form-control" required=" ">
+        <input type="search" placeholder="Enter ID..." name="search" class="form-control" required="">
         <button type="submit" >
             <span class="fa fa-search" aria-hidden="true"></span>
         </button>

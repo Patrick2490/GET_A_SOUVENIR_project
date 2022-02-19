@@ -7,7 +7,7 @@
         to
         <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
     <h3>Status: {{ souvenir.status }}</h3>
-    <p>Travelling: {{ souvenir.travelling }}</p>
+    <p>On the way: {{ souvenir.on_the_way }}</p>
     <p>Message from sender: {{ souvenir.send_user_message }}</p>
     {% if souvenir.receive_user_img %}
         <img src="{{ souvenir.send_user_img.url }}" width="400" height="400" alt="img">

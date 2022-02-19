@@ -37,10 +37,8 @@ class SearchSouvenir(SouvenirsView):
 
 class SouvenirView(DetailView):
     model = Souvenir
-    # pk_url_kwarg = 'souvenir_id'
     slug_url_kwarg = 'souvenir_slug'
     context_object_name = 'souvenir'
-    # souvenir = Souvenir.objects.get(souvenir_id=pk)
     template_name = 'souvenirs_app/souvenir.html'
 
 
@@ -101,7 +99,16 @@ class SendUserSouvenirsView(LoginRequiredMixin, ListView):
     context_object_name = 'send_user_souvenirs'
 
     def get_queryset(self):
-        return Souvenir.objects.filter(send_user__slug=slugify(self.request.user))
+        return Souvenir.objects.filter(send_user__slug=slugify(self.request.user), status='RECEIVED')
+
+
+class OnTheWayUserSouvenirsView(LoginRequiredMixin, ListView):
+    model = Souvenir
+    template_name = 'souvenirs_app/send_user_souvenirs.html'
+    context_object_name = 'send_user_souvenirs'
+
+    def get_queryset(self):
+        return Souvenir.objects.filter(receive_user__slug=slugify(self.request.user), status='ON THE WAY')
 
 
 class ReceiveUserSouvenirsView(LoginRequiredMixin, ListView):
@@ -110,7 +117,7 @@ class ReceiveUserSouvenirsView(LoginRequiredMixin, ListView):
     context_object_name = 'receive_user_souvenirs'
 
     def get_queryset(self):
-        return Souvenir.objects.filter(receive_user__slug=slugify(self.request.user))
+        return Souvenir.objects.filter(receive_user__slug=slugify(self.request.user), status='RECEIVED')
 
 
 class CreateUserInfo(LoginRequiredMixin, CreateView):

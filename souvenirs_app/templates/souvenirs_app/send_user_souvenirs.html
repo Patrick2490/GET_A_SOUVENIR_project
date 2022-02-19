@@ -13,6 +13,10 @@
                 <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
                 to
                 <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
+                {{ souvenir.status }}
+                {% if souvenir.status == 'RECEIVED' %}
+                    {{ souvenir.on_the_way }}
+                {% endif %}
         {% empty %}
             <li>No souvenirs have been sent yet</li>
         {% endfor %}
