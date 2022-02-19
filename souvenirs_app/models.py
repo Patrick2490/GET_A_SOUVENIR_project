@@ -54,7 +54,7 @@ class Souvenir(models.Model):
     send_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='send_user')
     send_date = models.DateField(auto_now_add=True)
     receive_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='receive_user')
-    receive_date = models.DateField()
+    receive_date = models.DateField(null=True, blank=True)
     send_user_img = models.ImageField(upload_to='send/', default='no-photo.png', null=True, blank=True)
     receive_user_img = models.ImageField(upload_to='receive/', default='no-photo.png', null=True, blank=True)
     send_user_message = models.TextField(max_length=500, null=True, blank=True)
