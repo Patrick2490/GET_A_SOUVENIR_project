@@ -1,4 +1,5 @@
 from email import message
+from multiprocessing import context
 from pyexpat import model
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -10,8 +11,8 @@ from django.utils.text import slugify
 
 from django.contrib.auth.models import User
 from .models import Souvenir, UserInfo, Country
-from .forms import CreateSouvenirForm, UpdateSouvenirForm, UserInfoForm
-from .permissions import SendUserChangePermissionMixin
+from .forms import CreateSouvenirForm, UserInfoForm, UpdateSouvenirBySendUserForm, UpdateSouvenirByReceiveUserForm
+from .permissions import SendUserChangePermissionsMixin, ReceiveUserChangePermissionsMixin
 
 import random
 
@@ -40,36 +41,45 @@ class CreateSouvenir(LoginRequiredMixin, CreateView):
     form_class = CreateSouvenirForm
     template_name = 'souvenirs_app/create_souvenir.html'
     context_object_name = 'create_souvenir'
-    initial = {'message': 'Hello! I am very happy to send a souvenir for you!'}
+    initial = {'send_user_message': 'Hello! I am very happy to send a souvenir for you!'}
 
     def form_valid(self, form):
         form.instance.send_user = UserInfo.objects.get(username=self.request.user)
         form.instance.receive_user = random.choice(UserInfo.objects.exclude(username=self.request.user))
+        form.instance.status = 'Travelling'
         random_number = str(random.randint(0, 99999)).zfill(5)
         form.instance.slug = f'{UserInfo.objects.get(username=form.instance.send_user).country.code}' \
                              f'{random_number}' \
                              f'{UserInfo.objects.get(username=form.instance.receive_user).country.code}'
         return super(CreateSouvenir, self).form_valid(form)
 
-class UpdateSouvenir(SendUserChangePermissionMixin, UpdateView):
 
+class UpdateSouvenirBySendUser(SendUserChangePermissionsMixin, UpdateView):
     # permission_required = 'souvenirs_app.change_souvenir'
     model = Souvenir
-    form_class = UpdateSouvenirForm
-    template_name = 'souvenirs_app/update_souvenir.html'
+    form_class = UpdateSouvenirBySendUserForm
+    template_name = 'souvenirs_app/update_souvenir_by_send_user.html'
     slug_url_kwarg = 'souvenir_slug'
 
     # def has_permission(self):
     #     print(get_object().receive_user == request)
     #     return True
-    #
+
     # def post(self, request, *args, **kwargs):
     #     self.object = self.get_object()
-    #     print(self.object.send_user.username, self.get_object(), request.user)
+    #     print(self.object.send_user.username, self.get_object().send_user, request.user)
     #     if self.object.send_user.username == request.user:
     #         return super().post(request, *args, **kwargs)
     #     else:
-    #         return Http404
+    #         return HttpResponseRedirect('souvenirs_app/404.html')
+
+
+class UpdateSouvenirByReceiveUser(ReceiveUserChangePermissionsMixin, UpdateView):
+    model = Souvenir
+    form_class = UpdateSouvenirByReceiveUserForm
+    template_name = 'souvenirs_app/update_souvenir_by_receive_user.html'
+    slug_url_kwarg = 'souvenir_slug'
+    initial = {'receive_user_message': 'Thank you for the souvenir!'}
 
 
 class SendUserSouvenirsView(LoginRequiredMixin, ListView):
@@ -142,3 +152,15 @@ class MyInfoDetailView(UserInfoDetailView):
 
     def get_object(self, queryset=None):
         return UserInfo.objects.get(username=self.request.user)
+
+
+class SearchSouvenir(ListView):
+    paginate_by = 3
+
+    def get_queryset(self):
+        return Souvenir.objects.filter(slug__icontains=self.request.GET.get('q'))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['q'] = f'q={self.request.GET.get("q")}&'
+        return context

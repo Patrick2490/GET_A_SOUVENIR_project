@@ -1,19 +1,25 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
-
-    <h2>Souvenir {{ souvenir.slug }}
+    <h2>Souvenir #{{ souvenir.slug }}
         sent by
         <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
         to
         <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
     <h3>Status: {{ souvenir.status }}</h3>
+    <p>Message from sender: {{ souvenir.send_user_message }}</p>
+    {% if souvenir.receive_user_img %}
+        <img src="{{ souvenir.send_user_img.url }}" alt="img">
+    {% else %}
+        <p></p>
+    {% endif %}
+    <p> Message from recipient: {{ souvenir.receive_user_message }}</p>
     {% if souvenir.receive_user_img %}
         <img src="{{ souvenir.receive_user_img.url }}" alt="img">
     {% else %}
         <p></p>
     {% endif %}
-
-    <p><a href="{% url 'souvenirs_app:update_souvenir' souvenir.slug %}">Update souvenir</a></p>
+        <p><a href="{% url 'souvenirs_app:update_souvenir_by_send_user' souvenir.slug %}">Update souvenir by {{ souvenir.send_user }}</a></p>
+        <p><a href="{% url 'souvenirs_app:update_souvenir_by_receive_user' souvenir.slug %}">Update souvenir by {{ souvenir.receive_user }}</a></p>
 
 {% endblock content %}

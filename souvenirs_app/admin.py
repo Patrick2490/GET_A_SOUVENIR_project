@@ -19,5 +19,5 @@ class UserInfoAdmin(admin.ModelAdmin):
 
 @admin.register(models.Souvenir)
 class SouvenirAdmin(admin.ModelAdmin):
-    list_display = ('souvenir_id', 'slug', 'send_user', 'send_date', 'receive_user', 'receive_date', 'send_user_img', 'receive_user_img', 'status')
+    list_display = ('souvenir_id', 'slug', 'send_user', 'send_date', 'receive_user', 'receive_date','status', 'send_user_message', 'send_user_img', 'receive_user_message', 'receive_user_img')
     ordering = ['souvenir_id']

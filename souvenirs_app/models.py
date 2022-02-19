@@ -57,7 +57,8 @@ class Souvenir(models.Model):
     receive_date = models.DateField(auto_now=True)
     send_user_img = models.ImageField(upload_to='send/', default='no-photo.png', null=True, blank=True)
     receive_user_img = models.ImageField(upload_to='receive/', default='no-photo.png', null=True, blank=True)
-    message = models.TextField(max_length=500, null=True, blank=True)
+    send_user_message = models.TextField(max_length=500, null=True, blank=True)
+    receive_user_message = models.TextField(max_length=500, null=True, blank=True)
 
     STATUS_CHOICES = [
         ('ON THE WAY', 'On the way'),

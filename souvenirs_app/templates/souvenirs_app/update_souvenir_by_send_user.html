@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form action="{% url 'souvenirs_app:update_souvenir' souvenir.slug %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'souvenirs_app:update_souvenir_by_send_user' souvenir.slug %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
     <button name="submit">UPDATE</button>

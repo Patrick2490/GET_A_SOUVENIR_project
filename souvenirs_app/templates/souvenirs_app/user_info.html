@@ -5,11 +5,14 @@
     <h1>{{ user_info.username }}</h1>
     <h2>{{ user_info.sex }}</h2>
     {% if user_info.avatar %}
-        <img src="{{ user_info.avatar.url }}" alt="img">
+        <img src="{{ user_info.avatar.url }}" width='100' heigth='100' alt="img">
     {% else %}
         <p></p>
     {% endif %}
-
-{#    <a href="{% url 'souvenirs_app:update_user_info' user_info.slug %}"> EDIT INFORMATION</a>#}
+    <p>{{ user_info.date_of_bithday }}</p>
+    <p>{{ user_info.country }}</p>
+    <p>{{ user_info.city }}</p>
+    <p>{{ user_info.address }}</p>
+    <p>{{ user_info.about }}</p>
 
 {% endblock content %}

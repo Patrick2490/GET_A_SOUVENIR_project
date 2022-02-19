@@ -5,12 +5,18 @@ from .models import Souvenir, UserInfo
 class CreateSouvenirForm(forms.ModelForm):
     class Meta:
         model = Souvenir
-        fields = ['message']
+        fields = ['send_user_message']
 
-class UpdateSouvenirForm(forms.ModelForm):
+class UpdateSouvenirBySendUserForm(forms.ModelForm):
     class Meta:
         model = Souvenir
-        fields = ['message', 'send_user_img', 'receive_user_img']
+        fields = ['send_user_message', 'send_user_img']
+
+
+class UpdateSouvenirByReceiveUserForm(forms.ModelForm):
+    class Meta:
+        model = Souvenir
+        fields = ['receive_user_message', 'receive_user_img', 'status']
 
 
 class UserInfoForm(forms.ModelForm):
