@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +8,6 @@
     <a href="{% url 'souvenirs_app:index' %}">GET A SOUVENIR</a>
 </header>
 <body>
-<!-- <p>
-    <a href="{% url 'souvenirs_app:create_user_info' %}">Fill the information about you</a>
-</p> -->
 <p>
     <a href="{%  url 'souvenirs_app:souvenirs' %}">Souvenirs</a>
 </p>
@@ -37,13 +33,13 @@
     <a href="{% url 'users:login' %}">Log in</a>
 {% endif %}
 {% block content %}{% endblock content %}
-
-<form action="{% url 'souvenirs_app:search_souvenir' %}" method="get" class="d-flex editContent">
-    <input type="search" placeholder="Enter ID..." name="search" class="form-control" required="" ">
-    <button type="submit" >
-        <span class="fa fa-search" aria-hidden="true"></span>
-    </button>
-</form>
-
+<p>
+    <form action="{% url 'souvenirs_app:search_souvenir' %}" method="get" class="d-flex editContent">
+        <input type="search" placeholder="Enter ID..." name="search" class="form-control" required=" ">
+        <button type="submit" >
+            <span class="fa fa-search" aria-hidden="true"></span>
+        </button>
+    </form>
+</p>
 </body>
 </html>

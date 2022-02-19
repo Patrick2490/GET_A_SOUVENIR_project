@@ -54,7 +54,7 @@ class Souvenir(models.Model):
     send_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='send_user')
     send_date = models.DateField(auto_now_add=True)
     receive_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='receive_user')
-    receive_date = models.DateField(auto_now=True)
+    receive_date = models.DateField()
     send_user_img = models.ImageField(upload_to='send/', default='no-photo.png', null=True, blank=True)
     receive_user_img = models.ImageField(upload_to='receive/', default='no-photo.png', null=True, blank=True)
     send_user_message = models.TextField(max_length=500, null=True, blank=True)
@@ -66,17 +66,14 @@ class Souvenir(models.Model):
     ]
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='ON THE WAY')
 
-    # def save(self):
-    #     super(Souvenir, self).save()
-    #     if not self.slug:
-    #         self.slug = slugify(self.username)+'-'+str(self.souvenir_id)
-    #         super(Souvenir, self).save()
-
     def __str__(self):
         return str(self.souvenir_id)
 
     def get_absolute_url(self):
         return reverse('souvenirs_app:souvenir', kwargs={'souvenir_slug': self.slug})
+
+    def travelling(self):
+        return f'{(self.receive_date - self.send_date).days} days'
 
     class Meta:
         verbose_name = 'Souvenir'

@@ -14,6 +14,7 @@ from .models import Souvenir, UserInfo, Country
 from .forms import CreateSouvenirForm, UserInfoForm, UpdateSouvenirBySendUserForm, UpdateSouvenirByReceiveUserForm
 from .permissions import SendUserChangePermissionsMixin, ReceiveUserChangePermissionsMixin
 
+from datetime import date
 import random
 
 
@@ -25,6 +26,13 @@ class SouvenirsView(ListView):
     model = Souvenir
     template_name = 'souvenirs_app/souvenirs.html'
     context_object_name = 'souvenirs'
+
+
+class SearchSouvenir(SouvenirsView):
+    template_name = 'souvenirs_app/search_list.html'
+
+    def get_queryset(self):
+        return Souvenir.objects.filter(slug__exact=self.request.GET.get('search'))
 
 
 class SouvenirView(DetailView):
@@ -79,6 +87,12 @@ class UpdateSouvenirByReceiveUser(ReceiveUserChangePermissionsMixin, UpdateView)
     template_name = 'souvenirs_app/update_souvenir_by_receive_user.html'
     slug_url_kwarg = 'souvenir_slug'
     initial = {'receive_user_message': 'Thank you for the souvenir!'}
+
+    def form_valid(self, form):
+        self.object.receive_date = date.today()
+        self.object.status = 'RECEIVED'
+        # print(self.object.receive_date, self.object.status)
+        return super().form_valid(form)
 
 
 class SendUserSouvenirsView(LoginRequiredMixin, ListView):
@@ -153,8 +167,4 @@ class MyInfoDetailView(UserInfoDetailView):
         return UserInfo.objects.get(username=self.request.user)
 
 
-class SearchSouvenir(SouvenirsView):
-    template_name = 'souvenirs_app/search_list.html'
 
-    def get_queryset(self):
-        return Souvenir.objects.filter(slug__exact=self.request.GET.get('search'))

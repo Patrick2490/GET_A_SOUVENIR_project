@@ -12,6 +12,8 @@
                 to
                 <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
                 {{ souvenir.status }}
+                {{ souvenir.travelling }}
+{#                {{ souvenir.receive_date|date:'d/m/Y' }}#}
         {% empty %}
             <li>No souvenirs have been sent yet</li>
         {% endfor %}
