@@ -39,8 +39,8 @@
 {% block content %}{% endblock content %}
 
 <form action="{% url 'souvenirs_app:search_souvenir' %}" method="get" class="d-flex editContent">
-    <input type="search" placeholder="Введите ID..." name="q" class="form-control" required="">
-    <button type="submit" class="btn1 btn">
+    <input type="search" placeholder="Enter ID..." name="search" class="form-control" required="" ">
+    <button type="submit" >
         <span class="fa fa-search" aria-hidden="true"></span>
     </button>
 </form>

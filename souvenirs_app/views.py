@@ -45,8 +45,7 @@ class CreateSouvenir(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.send_user = UserInfo.objects.get(username=self.request.user)
-        form.instance.receive_user = random.choice(UserInfo.objects.exclude(username=self.request.user))
-        form.instance.status = 'Travelling'
+        form.instance.receive_user = random.choice(UserInfo.objects.exclude(country=self.request.user.userinfo.country))
         random_number = str(random.randint(0, 99999)).zfill(5)
         form.instance.slug = f'{UserInfo.objects.get(username=form.instance.send_user).country.code}' \
                              f'{random_number}' \
@@ -154,13 +153,8 @@ class MyInfoDetailView(UserInfoDetailView):
         return UserInfo.objects.get(username=self.request.user)
 
 
-class SearchSouvenir(ListView):
-    paginate_by = 3
+class SearchSouvenir(SouvenirsView):
+    template_name = 'souvenirs_app/search_list.html'
 
     def get_queryset(self):
-        return Souvenir.objects.filter(slug__icontains=self.request.GET.get('q'))
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['q'] = f'q={self.request.GET.get("q")}&'
-        return context
+        return Souvenir.objects.filter(slug__exact=self.request.GET.get('search'))
