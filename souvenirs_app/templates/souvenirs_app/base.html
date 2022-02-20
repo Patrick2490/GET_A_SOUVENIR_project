@@ -1,48 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GET A SOUVENIR</title>
+  <title>GET A SOUVENIR</title>
+  <link rel="icon" type="image/x-icon" href="/static/logo.jfif">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/base.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<header>
-    <a href="{% url 'souvenirs_app:index' %}">GET A SOUVENIR</a>
-</header>
 <body>
-<p>
-    <a href="{%  url 'souvenirs_app:souvenirs' %}">Souvenirs</a>
-</p>
-<p>
-    <a href="{%  url 'souvenirs_app:user_infos' %}">USERS</a>
-</p>
-<p>
-    <a href="{%  url 'souvenirs_app:send_user_souvenirs' %}">Sent Souvenirs</a>
-</p>
-<p>
-    <a href="{%  url 'souvenirs_app:on_the_way_user_souvenirs' %}">Souvenirs on the way</a>
-</p>
-<p>
-    <a href="{%  url 'souvenirs_app:receive_user_souvenirs' %}">Received Souvenirs</a>
-</p>
-{% if user.is_authenticated %}
-    Hello, {{ user.get_username }}! TEST
-    <!-- <a href="{% url 'souvenirs_app:user_info' request.user %}">user_info</a> -->
-    <p><a href="{% url 'souvenirs_app:my_info' request.user %}">my_info</a></p>
-    <p><a href="{% url 'souvenirs_app:update_user_info' request.user %}">update_user_info</a></p>
-    <p>
-        <a href="{% url 'users:logout' %}">Log out</a>
-    </p>
-{% else %}
-    <a href="{% url 'users:register' %}">Register</a>
-    <a href="{% url 'users:login' %}">Log in</a>
-{% endif %}
-{% block content %}{% endblock content %}
-<p>
-    <form action="{% url 'souvenirs_app:search_souvenir' %}" method="get" class="d-flex editContent">
-        <input type="search" placeholder="Enter ID..." name="search" class="form-control" required="">
-        <button type="submit" >
-            <span class="fa fa-search" aria-hidden="true"></span>
-        </button>
-    </form>
-</p>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'souvenirs_app:index' %}">GET A SOUVENIR</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{% url 'souvenirs_app:index' %}">HOME</a></li>
+      <li class="active"><a href="{%  url 'souvenirs_app:user_infos' %}">USERS</a></li>
+      <li class="active"><a href="{%  url 'souvenirs_app:souvenirs' %}">SOUVENIRS</a></li>
+      {% if user.is_authenticated %}
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">YOUR SOUVENIRS<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{%  url 'souvenirs_app:send_user_souvenirs' %}">SENT SOUVENIRS</a></li>
+          <li><a href="{%  url 'souvenirs_app:on_the_way_user_souvenirs' %}">SOUVENIRS ON THE WAY</a></li>
+          <li><a href="{%  url 'souvenirs_app:receive_user_souvenirs' %}">RECEIVED SOUVENIRS</a></li>
+        </ul>
+        {% endif %}
+      </li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">ME<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'souvenirs_app:my_info' request.user %}">MY INFORMATION</a></li>
+          <li><a href="{% url 'souvenirs_app:update_user_info' request.user %}">UPDATE INFORMATION</a></li>
+        </ul>
+      </li>
+      <li><a href="#">ABOUT</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'users:logout' %}"><span class="glyphicon glyphicon-log-out"></span> LOG OUT</a></li>
+      {% else %}
+      <li><a href="{% url 'users:register' %}"><span class="glyphicon glyphicon-list-alt"></span> REGISTER</a></li>
+      <li><a href="{% url 'users:login' %}"><span class="glyphicon glyphicon-log-in"></span> LOG IN</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+<main>
+  <section class="title-section">
+    <div class="wrapper-title-section">
+      <h1>Get souvenirs from people from all over the world!</h1>
+    </div>
+  </section>
+</main>
+{% block content %}{% endblock content %}  
+
+
 </body>
 </html>
