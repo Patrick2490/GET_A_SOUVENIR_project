@@ -31,8 +31,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    padding-top: 200px;
-    padding-bottom: 330px;
     color: #FF6E59;
     display: flex;
     justify-content: flex-end;
@@ -40,15 +38,56 @@
 
 .wrapper-title-section {
     width: 650px;
+    display: flex;
+    flex-direction: column;
 }
 
 .wrapper-title-section h1 {
     text-align: end;
     text-transform: uppercase;
-    margin: -150px 0;
+    margin-right: 50px;
     font-size: 36px;
     font-weight:900;
     max-width: 544px;
     max-height: 99px;
     color: #FFFFFF;
+    -webkit-text-stroke-width: medium;
+    -webkit-text-stroke-color: #094275;
 }
+form {
+    margin: auto; 
+    max-width: 300px; 
+    margin-top: 400px; 
+    margin-bottom: 20px;
+}
+
+
+form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+  }
+  
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #094275;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+  
+  form.example button:hover {
+    background: #094275;
+  }
+  
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;

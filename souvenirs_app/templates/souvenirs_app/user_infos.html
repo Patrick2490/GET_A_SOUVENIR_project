@@ -1,17 +1,42 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/static/tables.css">
+</head>
+<body>
 
-    <h3>THERE ARE {{ user_infos.count }} ACTIVE USERS ON THE WEBSITE</h3>
 
-    <ul>
-        {% for user_info in user_infos %}
-            <li><a href="{{ user_info.get_absolute_url }}">{{ user_info.username }}</a></li>
-        {% empty %}
-            <li>No user have been register yet</li>
+<div class="container mt-3">
+    <h2>THERE ARE {{ user_infos.count }} ACTIVE USERS ON THE WEBSITE</h2>
+    <table class="table table-hover">
+
+      <thead>
+        <tr>
+          <th>USERNAME</th>
+          <th>COUNTRY</th>
+        </tr>
+      </thead>
+      {% for user_info in user_infos %}
+      <tbody>
+        <tr>
+          <td><a href="{{ user_info.get_absolute_url }}">{{ user_info.username }}</a></td>
+          <td>{{ user_info.country }}</td>
+        </tr>
+
+      </tbody>
+      {% empty %}
+      <p>No user have been register yet</p>
         {% endfor %}
-    </ul>
+    </table>
+  </div>
+  
+  </body>
+  <a href="{% url 'souvenirs_app:create_souvenir' %}">Send a souvenir</a>
 
-    <a href="{% url 'souvenirs_app:create_souvenir' %}">Send a souvenir</a>
-
-{% endblock content %}
+  {% endblock content %}
+  </html>

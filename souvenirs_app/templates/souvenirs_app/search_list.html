@@ -1,25 +1,47 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/static/tables.css">
+</head>
+<body>
 
-    <h3>{{ souvenirs.count }} SOUVENIRS FOUND </h3>
-
-    <ul>
+    <div class="container mt-3">
+        <h2>{{ souvenirs.count }} SOUVENIRS FOUND </h2>
+        <table class="table table-hover">
+    
+          <thead>
+            <tr>
+              <th>SOUVENIR ID</th>
+              <th>SENT BY</th>
+              <th>TO</th>
+              <th>STATUS</th>
+              <th>DAYS ON THE WAY IF RECEICED</th>
+            </tr>
+          </thead>
         {% for souvenir in souvenirs %}
-            <li><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.slug }}</a>:
-                by
-                <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
-                to
-                <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
-                {{ souvenir.status }}
-                {% if souvenir.status == 'RECEIVED' %}
-                    {{ souvenir.on_the_way }}
-                {% endif %}
+          <tbody>
+            <tr>
+              <td><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.slug }}</a></td>
+              <td><a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</td>
+              <td><a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a></td>
+              <td>{{ souvenir.status }}</td>
+              {% if souvenir.status == 'RECEIVED' %}
+              <td>{{ souvenir.on_the_way }}</td>
+              {% endif %}
         {% empty %}
-            <li>No souvenirs have been sent yet</li>
         {% endfor %}
-    </ul>
-
-    <a href="{% url 'souvenirs_app:create_souvenir' %}">Send a souvenir</a>
-
-{% endblock content %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      </body>
+      <a href="{% url 'souvenirs_app:create_souvenir' %}">Send a souvenir</a>
+    
+      {% endblock content %}
+</html>

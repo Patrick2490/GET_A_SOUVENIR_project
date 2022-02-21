@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="/static/base.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -52,6 +53,10 @@
   <section class="title-section">
     <div class="wrapper-title-section">
       <h1>Get souvenirs from people from all over the world!</h1>
+        <form class="example" action="{% url 'souvenirs_app:search_souvenir' %}" method="get">
+          <input type="text" placeholder="Register souvenir" name="search" >
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
     </div>
   </section>
 </main>
