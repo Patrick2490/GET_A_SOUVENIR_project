@@ -3,8 +3,14 @@ from django.http import Http404
 
 
 class SendUserChangePermissionsMixin:
+    '''
+    Mixin that provide permissions for send_user
+    '''
     def has_permissions(self):
-        print(self.get_object().send_user.username.username == self.request.user.username)
+        '''
+        Return True if user has permissions
+        '''
+        # print(self.get_object().send_user.username.username == self.request.user.username)
         return self.get_object().send_user.username.username == self.request.user.username
 
     def dispatch(self, request, *args, **kwargs):
@@ -14,8 +20,14 @@ class SendUserChangePermissionsMixin:
 
 
 class ReceiveUserChangePermissionsMixin:
+    '''
+    Mixin that provide permissions for receive_user
+    '''
     def has_permissions(self):
-        print(self.get_object().receive_user.username.username == self.request.user.username)
+        '''
+        Return True if user has permissions
+        '''
+        # print(self.get_object().receive_user.username.username == self.request.user.username)
         return self.get_object().receive_user.username.username == self.request.user.username
 
     def dispatch(self, request, *args, **kwargs):
