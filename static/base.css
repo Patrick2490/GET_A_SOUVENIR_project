@@ -27,12 +27,12 @@
 }
 
 .title-section {
-    background-image: url("/static/background-1.jpg");
+    background-image: url("/static/background-1-1.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     padding-top: 200px;
-    padding-bottom: 200px;
+    padding-bottom: 330px;
     color: #FF6E59;
     display: flex;
     justify-content: flex-end;
@@ -43,10 +43,11 @@
 }
 
 .wrapper-title-section h1 {
-    text-align: center;
+    text-align: end;
     text-transform: uppercase;
     margin: -150px 0;
     font-size: 36px;
+    font-weight:900;
     max-width: 544px;
     max-height: 99px;
     color: #FFFFFF;

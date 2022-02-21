@@ -36,7 +36,7 @@
           <li><a href="{% url 'souvenirs_app:update_user_info' request.user %}">UPDATE INFORMATION</a></li>
         </ul>
       </li>
-      <li><a href="#">ABOUT</a></li>
+      <li><a href="{% url 'souvenirs_app:about' %}">ABOUT</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       {% if user.is_authenticated %}
