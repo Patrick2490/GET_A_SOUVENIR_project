@@ -49,6 +49,12 @@ class UserInfo(models.Model):
         '''
         return reverse('souvenirs_app:user_info', kwargs={'user_info_slug': self.slug})
 
+    def send_count(self):
+        return UserInfo.objects.get(slug = self.slug).send_user.all().count()
+
+    def receive_count(self):
+        return UserInfo.objects.get(slug = self.slug).receive_user.all().count()
+
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.username)
     #     super(UserInfo, self).save(*args, **kwargs)

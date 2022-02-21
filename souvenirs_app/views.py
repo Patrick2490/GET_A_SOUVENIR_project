@@ -79,7 +79,7 @@ class OnTheWayUserSouvenirsView(LoginRequiredMixin, SouvenirsView):
         '''
         Return on the way souvenirs send by user
         '''
-        return Souvenir.objects.filter(receive_user__slug=slugify(self.request.user), status='ON THE WAY')
+        return Souvenir.objects.filter(send_user__slug=slugify(self.request.user), status='ON THE WAY')
 
 
 class ReceiveUserSouvenirsView(LoginRequiredMixin, SouvenirsView):

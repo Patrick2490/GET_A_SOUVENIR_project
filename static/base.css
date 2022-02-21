@@ -54,7 +54,7 @@
     -webkit-text-stroke-width: medium;
     -webkit-text-stroke-color: #094275;
 }
-form {
+.wrapper-title-section form {
     margin: auto; 
     max-width: 300px; 
     margin-top: 400px; 
@@ -91,3 +91,4 @@ form.example input[type=text] {
     content: "";
     clear: both;
     display: table;
+  }
