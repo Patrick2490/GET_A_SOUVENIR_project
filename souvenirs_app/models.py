@@ -59,10 +59,6 @@ class UserInfo(models.Model):
     def receive_count(self):
         return UserInfo.objects.get(slug = self.slug).receive_user.all().filter(status='RECEIVED').count()
 
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.username)
-    #     super(UserInfo, self).save(*args, **kwargs)
-
     class Meta:
         '''
         Change the display of instances in a table

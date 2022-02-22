@@ -16,7 +16,7 @@
     <form action="{% url 'souvenirs_app:create_souvenir' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-    <button name="submit">LET`S GO !</button>
+    <button class="info-update-button" name="submit">LET`S GO !</button>
     </form>
 
 {% endblock content %}

@@ -19,7 +19,9 @@
             <div class="wrapper-info-2">
                 <div class="wrapper-info-2-send-user">
                     <p>message from sender:</p>
+                    {% if souvenir.send_user_message %}
                     <p>{{ souvenir.send_user_message }}</p>
+                    {% endif %}
                     {% if souvenir.receive_user_img %}
                         <img src="{{ souvenir.send_user_img.url }}" width="400" height="400" alt="img">
                     {% else %}
@@ -29,7 +31,9 @@
                 </div>
                 <div class="wrapper-info-2-receive-user">
                     <p> message from recipient:</p> 
+                    {% if souvenir.receive_user_message %}
                     <p>{{ souvenir.receive_user_message }}</p>
+                    {% endif %}
                     {% if souvenir.receive_user_img %}
                         <img src="{{ souvenir.receive_user_img.url }}" width="400" height="400" alt="img">
                     {% else %}

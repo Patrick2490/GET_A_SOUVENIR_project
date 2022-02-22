@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     #my_apps
     'souvenirs_app',
     'users',
+    'api.apps.ApiConfig',
+    #api
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

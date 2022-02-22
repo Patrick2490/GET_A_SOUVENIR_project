@@ -48,7 +48,7 @@ section .info-1{
     justify-content: space-around;
 }
 
-img {
+.wrapper-info-2 img {
     padding: 5px;
     background-color: #094275;
     border: 5px solid #fc5356;
