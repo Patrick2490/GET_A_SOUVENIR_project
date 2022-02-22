@@ -21,6 +21,7 @@ class Country(models.Model):
         Change the display of instances in a table
         '''
         verbose_name_plural = 'Countries'
+        ordering = ['title']
 
 
 class UserInfo(models.Model):

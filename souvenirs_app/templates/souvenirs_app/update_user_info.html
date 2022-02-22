@@ -1,14 +1,15 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/CreateInfo.css">
 
-    <h3>YOUR USERNAME: {{ user.get_username }}</h3>
-    <h4>Fill in the fields</h4>
+    <h3 style="font-size: 45px; font-weight: 700; margin: 0 0 6px; color: #094275;">YOUR USERNAME: <span style="color: #FF6E59">{{ user.get_username }}</span></h3>
+    <h4 style="color: #094275">Fill the Form</h4>
 
     <form action="{% url 'souvenirs_app:update_user_info' object.slug %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-    <input type="submit" value="Update"/>
+    <input class="info-update-button" type="submit" value="Update"/>
     </form>
 
 {% endblock content %}

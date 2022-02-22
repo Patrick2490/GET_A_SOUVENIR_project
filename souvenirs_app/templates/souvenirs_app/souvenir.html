@@ -1,28 +1,44 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
-    <h2>Souvenir {{ souvenir.slug }}</h2>
-        sent by
-        <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
-        to
-        <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a>
-    <h3>Status: {{ souvenir.status }}</h3>
-    {% if souvenir.status == 'RECEIVED' %}
-        {{ souvenir.on_the_way }}
-    {% endif %}
-    <p>Message from sender: {{ souvenir.send_user_message }}</p>
-    {% if souvenir.receive_user_img %}
-        <img src="{{ souvenir.send_user_img.url }}" width="400" height="400" alt="img">
-    {% else %}
-        <p></p>
-    {% endif %}
-    <p> Message from recipient: {{ souvenir.receive_user_message }}</p>
-    {% if souvenir.receive_user_img %}
-        <img src="{{ souvenir.receive_user_img.url }}" width="400" height="400" alt="img">
-    {% else %}
-        <p></p>
-    {% endif %}
-        <p><a href="{% url 'souvenirs_app:update_souvenir_by_send_user' souvenir.slug %}">Update souvenir by {{ souvenir.send_user }}</a></p>
-        <p><a href="{% url 'souvenirs_app:update_souvenir_by_receive_user' souvenir.slug %}">Update souvenir by {{ souvenir.receive_user }}</a></p>
+
+<link rel="stylesheet" type="text/css" href="/static/souvenir.css">
+    <section class="info">
+        <div class="info-1"><h2>Souvenir <span style="color: #FF6E59"">{{ souvenir.slug }}</span></h2>
+            <p>sent by
+            <a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</a>
+            to
+            <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a></p>
+        <p>status: <span style="color: #FF6E59"">{{ souvenir.status }}</span></p>
+        {% if souvenir.status == 'RECEIVED' %}
+            {{ souvenir.on_the_way }}
+        {% endif %}
+        </div>
+
+        <div class="info-2">
+            <div class="wrapper-info-2">
+                <div class="wrapper-info-2-send-user">
+                    <p>message from sender:</p>
+                    <p>{{ souvenir.send_user_message }}</p>
+                    {% if souvenir.receive_user_img %}
+                        <img src="{{ souvenir.send_user_img.url }}" width="400" height="400" alt="img">
+                    {% else %}
+                        <p></p>
+                    {% endif %}
+                    <p><a href="{% url 'souvenirs_app:update_souvenir_by_send_user' souvenir.slug %}">Update souvenir by {{ souvenir.send_user }}</a></p>
+                </div>
+                <div class="wrapper-info-2-receive-user">
+                    <p> message from recipient:</p> 
+                    <p>{{ souvenir.receive_user_message }}</p>
+                    {% if souvenir.receive_user_img %}
+                        <img src="{{ souvenir.receive_user_img.url }}" width="400" height="400" alt="img">
+                    {% else %}
+                        <p></p>
+                    {% endif %}
+                        <p><a href="{% url 'souvenirs_app:update_souvenir_by_receive_user' souvenir.slug %}">Update souvenir by {{ souvenir.receive_user }}</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock content %}
