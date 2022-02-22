@@ -38,6 +38,12 @@
           <li><a href="{% url 'souvenirs_app:update_user_info' request.user %}">UPDATE INFORMATION</a></li>
         </ul>
       </li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">API<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'api:souvenirs' %}">API</a></li>
+          <li><a href="{% url 'swagger-docs' %}">SWAGGER</a></li>
+        </ul>
+      </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       {% if user.is_authenticated %}

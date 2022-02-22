@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     #api
     'rest_framework',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,7 @@ USE_TZ = True
 # My settings
 LOGIN_URL = '/users/login/'
 LOGIN_REDIRECT_URL = '/'
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
