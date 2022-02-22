@@ -1,14 +1,15 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="/static/CreateInfo.css">
 
-    <h1>Dear {{ user.get_username }}!</h1>
+    <h1 style="font-weight: 500; color: #FF6E59;">Dear {{ user.get_username }}!</h1>
 
-    <h3>Before sending a souvenir to a random recipient, please read the following information!</h3>
+    <h3 style="font-weight: 800; color: #094275;">Before sending a souvenir to a random recipient, please read the following information!</h3>
 
-    <h4>When you press the button, a person who doesn`t live in your country will be randomly selected.
+    <p style="text-align: justify;">When you press the button, a person who doesn`t live in your country will be randomly selected.
     You will send your souvenir to this user, specifying a unique identifier.
-    <p><span style="font-weight: 800;">Don't forget to attach a unique ID to the souvenir!</span></p>
+    <p><span style="font-weight: 800; color: #FF6E59;">Don't forget to attach a unique ID to the souvenir!</span></p>
 
     <p>Remember that this project is for honest people. Please don't click send a souvenir if you're not going to do it!</p></h4>
 
