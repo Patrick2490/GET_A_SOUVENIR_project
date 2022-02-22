@@ -50,10 +50,13 @@ class UserInfo(models.Model):
         return reverse('souvenirs_app:user_info', kwargs={'user_info_slug': self.slug})
 
     def send_count(self):
-        return UserInfo.objects.get(slug = self.slug).send_user.all().count()
+        return UserInfo.objects.get(slug = self.slug).send_user.all().filter(status='RECEIVED').count()
+
+    def on_the_way_count(self):
+        return UserInfo.objects.get(slug = self.slug).send_user.all().filter(status='ON THE WAY').count()
 
     def receive_count(self):
-        return UserInfo.objects.get(slug = self.slug).receive_user.all().count()
+        return UserInfo.objects.get(slug = self.slug).receive_user.all().filter(status='RECEIVED').count()
 
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.username)

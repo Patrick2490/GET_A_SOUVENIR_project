@@ -1,14 +1,28 @@
 {% extends 'souvenirs_app/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<title>W3.CSS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
 
+<div class="container mt-3"> 
     <h2 style="font-weight: 800; color: #094275;">Welcome to GET A SOUVENIR Project!</h2>
-    <p style="text-align: justify;">Send and receive souvenirs from people from all over the world!</p>
+    <p style="text-align: justify;"> After the world faced a pandemic, a lot has changed in the life of every person. 
+        We all began to communicate less with each other, go to visit each other. 
+        And we began to travel less and bring souvenirs from other countries.
+        But if we ourselves cannot bring a souvenir from another country, then why not get it from another person. 
+        The project is designed to help people exchange souvenirs. 
+        Send a souvenir to a random user from another country and expect to receive yours.</p>
+    <h3 style="font-weight: 500; color: #FF6E59;">Rules:</h3>
+    <p style="text-align: justify;">Before sending a souvenir to a random recipient, please read the following information!</p>
+    <p style="text-align: justify;">When you press the button <span>"Send a souvenir"</span>, a person who doesn`t live in your country will be randomly selected.
+    You will send your souvenir to this user, specifying a unique identifier. 
+    Get to know the person, learn their preferences, and send them a souvenir in a parcel. 
+    A souvenir that symbolizes your country. 
+    It can be some kind of delicacy, a commemorative postcard, a fridge magnet or something else.</p>
+    <p style="text-align: justify;"><span style="font-weight: 800;">Don't forget to attach a unique ID to the souvenir!</span></p>
 
+    <p style="text-align: justify;">Remember that this project is for honest people. Please don't click send a souvenir if you're not going to do it!</p>
+</div>
+
+</body>
+</html>
 {% endblock content %}

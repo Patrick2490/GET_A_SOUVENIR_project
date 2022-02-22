@@ -1,5 +1,10 @@
+* {
+  font-style: normal;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 body{
-    color: #6F8BA4;
+    color: #094275;
     margin-top:20px;
 }
 .section {
@@ -7,7 +12,7 @@ body{
     position: relative;
 }
 .gray-bg {
-    background-color: #f5f5f5;
+    background-color: #ffffff;
 }
 img {
     max-width: 100%;
@@ -40,10 +45,11 @@ img {
 .about-text p {
   font-size: 18px;
   max-width: 450px;
+  word-wrap: break-word;
 }
 .about-text p mark {
   font-weight: 600;
-  color: #20247b;
+  color: #094275;
 }
 
 .about-list {
@@ -53,7 +59,7 @@ img {
   padding: 5px 0;
 }
 .about-list label {
-  color: #20247b;
+  color: #094275;
   font-weight: 600;
   width: 88px;
   margin: 0;
@@ -67,7 +73,7 @@ img {
   right: 11px;
   width: 1px;
   height: 12px;
-  background: #20247b;
+  background: #094275;
   -moz-transform: rotate(15deg);
   -o-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
@@ -89,17 +95,18 @@ img {
 
 .about-section .counter {
   padding: 22px 20px;
-  background: #ffffff;
+  background: #094275;
   border-radius: 10px;
   box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
 }
 .about-section .counter .count-data {
   margin-top: 10px;
   margin-bottom: 10px;
+  color:#FF6E59
 }
 .about-section .counter .count {
   font-weight: 700;
-  color: #20247b;
+  color: #FF6E59;
   margin: 0 0 5px;
 }
 .about-section .counter p {
@@ -119,5 +126,16 @@ mark {
     color: #fc5356;
 }
 .dark-color {
-    color: #20247b;
+    color: #094275;
+}
+
+.img-thumbnail {
+  padding: 5px;
+  background-color: #094275;
+  border: 5px solid #fc5356;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
 }

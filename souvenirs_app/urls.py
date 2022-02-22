@@ -6,7 +6,6 @@ app_name = 'souvenirs_app'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('about/', views.about, name='about'),
     path('souvenirs/', views.SouvenirsView.as_view(), name='souvenirs'),
     path('souvenirs/<slug:souvenir_slug>/', views.SouvenirView.as_view(), name='souvenir'),
     path('create_souvenir/', views.CreateSouvenir.as_view(), name='create_souvenir'),

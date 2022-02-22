@@ -5,6 +5,7 @@
 <title>GET A SOUVENIR</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/static/user_info.css"
+<link rel="stylesheet" type="text/css" href="/static/tables.css">
 
 <section class="section about-section gray-bg" id="about">
     <div class="container">
@@ -13,6 +14,7 @@
                 <div class="about-text go-to">
                     <h3 class="dark-color">{{ user_info.username }}</h3>
                     <h6 class="theme-color lead">{{ user_info.username.first_name }} {{ user_info.username.last_name }}</h6>
+                    <label>About</label>
                     <p>{{ user_info.about }}</p>
                     <div class="row about-list">
                         <div class="col-md-6">
@@ -46,7 +48,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="about-avatar">
-                    <img style="border-radius: 50%;" src="{{ user_info.avatar.url }}" title="" alt="avatar">
+                    <img alt="" style="max-width: 555px; max-height: 450px;" title="" class="img-circle img-thumbnail isTooltip" src="{{ user_info.avatar.url }}" data-original-title="Usuario">
                 </div>
             </div>
         </div>
@@ -56,6 +58,12 @@
                     <div class="count-data text-center">
                         <h6 class="count h2" data-to="500" data-speed="500">{{ user_info.send_count }}</h6>
                         <p class="m-0px font-w-600">Sent souvenirs</p>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="count-data text-center">
+                        <h6 class="count h2" data-to="500" data-speed="500">{{ user_info.on_the_way_count }}</h6>
+                        <p class="m-0px font-w-600">On the way souvenirs</p>
                     </div>
                 </div>
                 <div class="col-6 col-lg-3">
@@ -72,7 +80,11 @@
 
 
 
-
-
-
 {% endblock content %}
+
+
+
+
+
+                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/avatar/avatar7.png" data-original-title="Usuario"> 
+                                   

@@ -25,13 +25,6 @@ def index(request):
     return render(request, 'souvenirs_app/index.html')
 
 
-def about(request):
-    '''
-    View for the aboutpage
-    '''  
-    return render(request, 'souvenirs_app/about.html')
-
-
 class SouvenirsView(ListView):
     '''
     View for all souvenirs
