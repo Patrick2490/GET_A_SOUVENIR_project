@@ -11,7 +11,7 @@
             <a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a></p>
         <p>status: <span style="color: #FF6E59"">{{ souvenir.status }}</span></p>
         {% if souvenir.status == 'RECEIVED' %}
-            {{ souvenir.on_the_way }}
+        <p>was on the way: <span style="color: #FF6E59"">{{ souvenir.on_the_way }}</span></p>    
         {% endif %}
         </div>
 

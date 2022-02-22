@@ -3,7 +3,7 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="/static/CreateInfo.css">
 
-    <form action="{% url 'souvenirs_app:update_souvenir_by_send_user' souvenir.slug %}" method="post" enctype="multipart/form-data">
+    <form class="update-souvenir-form" action="{% url 'souvenirs_app:update_souvenir_by_send_user' souvenir.slug %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
     <button class="info-update-button" name="submit">UPDATE</button>

@@ -16,7 +16,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="{% url 'souvenirs_app:index' %}">GET A SOUVENIR</a>
+      <a class="navbar-brand" style="display: flex; justify-content: space-between;" href="{% url 'souvenirs_app:index' %}">GET A SOUVENIR    <img src="/static/logo.jfif" style="width: 40px; height: 30px;"> </a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="{% url 'souvenirs_app:index' %}">HOME</a></li>
@@ -62,7 +62,7 @@
   </section>
 </main>
 
-<div class="container mt-3">
+<div class="container mt-3" style="background-color: rgba(9, 67, 117, 0.200)">
 {% block content %}{% endblock content %}  
 </div>
 

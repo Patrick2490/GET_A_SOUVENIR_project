@@ -3,13 +3,13 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="/static/CreateInfo.css">
 
-    <h3 style="font-size: 45px; font-weight: 700; margin: 0 0 6px; color: #094275;">YOUR USERNAME: <span style="color: #FF6E59">{{ user.get_username }}</span></h3>
+    <h3 style="font-size: 45px; font-weight: 700; margin: 20px 0 6px; color: #094275;">YOUR USERNAME: <span style="color: #FF6E59">{{ user.get_username }}</span></h3>
     <h4 style="color: #094275">Fill the Form</h4>
 
     <form action="{% url 'souvenirs_app:create_user_info' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-    <button name="submit">SAVE</button>
+    <button class="info-update-button" name="submit">SAVE</button>
     </form>
 
 {% endblock content %}

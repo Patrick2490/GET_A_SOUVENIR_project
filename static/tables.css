@@ -18,3 +18,7 @@ h2 {
 body {
     margin: 0 0;
 }
+
+a:hover {
+    color: #FF6E59;
+}
