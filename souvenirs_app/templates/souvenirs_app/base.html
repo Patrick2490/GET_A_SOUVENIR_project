@@ -23,7 +23,7 @@
       <li><a href="{%  url 'souvenirs_app:user_infos' %}">USERS</a></li>
       <li><a href="{%  url 'souvenirs_app:souvenirs' %}">SOUVENIRS</a></li>
       {% if user.is_authenticated %}
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">YOUR SOUVENIRS<span class="caret"></span></a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">MY SOUVENIRS<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="{%  url 'souvenirs_app:send_user_souvenirs' %}">SENT SOUVENIRS</a></li>
           <li><a href="{%  url 'souvenirs_app:on_the_way_user_souvenirs' %}">SOUVENIRS ON THE WAY</a></li>
