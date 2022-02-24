@@ -82,6 +82,7 @@ class ReceiveUserSouvenirsView(LoginRequiredMixin, SouvenirsView):
     template_name = 'souvenirs_app/receive_user_souvenirs.html'
     context_object_name = 'receive_user_souvenirs'
 
+
     def get_queryset(self):
         '''
         Return souvenirs received by user

@@ -65,6 +65,7 @@ class UserInfo(models.Model):
         '''
         verbose_name = 'User_information'
         verbose_name_plural = 'User_informations'
+        ordering = ['slug']
 
 
 class Souvenir(models.Model):
@@ -72,7 +73,7 @@ class Souvenir(models.Model):
     Model for the souvenirs
     """
     souvenir_id = models.AutoField(primary_key=True)
-    slug = models.SlugField(max_length=30, verbose_name='URL')
+    slug = models.SlugField(max_length=30, verbose_name='URL', unique=True)
     send_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='send_user')
     send_date = models.DateField(auto_now_add=True)
     receive_user = models.ForeignKey(UserInfo, on_delete=models.PROTECT, related_name='receive_user')
@@ -112,3 +113,4 @@ class Souvenir(models.Model):
         '''
         verbose_name = 'Souvenir'
         verbose_name_plural = 'Souvenirs'
+        ordering = ['send_date', 'souvenir_id']
