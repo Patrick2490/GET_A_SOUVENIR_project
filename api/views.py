@@ -1,5 +1,5 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
 from souvenirs_app.models import Souvenir, UserInfo
 from .serializers import SouvenirSerializer, UserInfoSerializer
 # from .permissions import IsOwnerOrReadOnly
@@ -25,6 +25,10 @@ class ListUserInfoApiView(generics.ListAPIView):
     queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
     depth = 1
+    permission_classes = (
+        IsAuthenticatedOrReadOnly,
+    )
+    
 
 class DetailUserInfoApiView(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserInfo.objects.all()
