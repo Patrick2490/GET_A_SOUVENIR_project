@@ -18,7 +18,9 @@
               <th>SOUVENIR ID</th>
               <th>SENT BY</th>
               <th>TO</th>
+              <th>SEND DATE</th>
               <th>STATUS</th>
+              <th>RECEIVE DATE</th>
               <th>DAYS ON THE WAY IF RECEICED</th>
             </tr>
           </thead>
@@ -30,6 +32,7 @@
               <td><a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a></td>
               <td>{{ souvenir.status }}</td>
               {% if souvenir.status == 'RECEIVED' %}
+              <td>{{ souvenir.receive_date }}</td>
               <td>{{ souvenir.on_the_way }}</td>
               {% endif %}
         {% empty %}
@@ -39,7 +42,6 @@
         </table>
       
       </body>
-      <a href="{% url 'souvenirs_app:create_souvenir' %}">Send a souvenir</a>
     
       {% endblock content %}
 </html>
