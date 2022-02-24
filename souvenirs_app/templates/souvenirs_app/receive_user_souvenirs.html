@@ -30,6 +30,7 @@
               <td><a href="{{ souvenir.get_absolute_url }}">{{ souvenir.slug }}</a></td>
               <td><a href="{{ souvenir.send_user.get_absolute_url }}">{{ souvenir.send_user }}</td>
               <td><a href="{{ souvenir.receive_user.get_absolute_url }}">{{ souvenir.receive_user }}</a></td>
+              <td>{{ souvenir.send_date }}</td>
               <td>{{ souvenir.status }}</td>
               {% if souvenir.status == 'RECEIVED' %}
               <td>{{ souvenir.receive_date }}</td>
