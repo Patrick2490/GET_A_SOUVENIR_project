@@ -18,3 +18,5 @@
 >***Run server :*** `python3 manage.py runserver`
 
 **Good luck!**
+
+website in test mode: https://get-a-souvenir.herokuapp.com/
