@@ -1,6 +1,6 @@
 from urllib import request
 from django.http import Http404
-
+from django.core.exceptions import PermissionDenied
 
 class SendUserChangePermissionsMixin:
     '''
@@ -15,7 +15,7 @@ class SendUserChangePermissionsMixin:
 
     def dispatch(self, request, *args, **kwargs):
         if not self.has_permissions():
-            raise Http404()
+            raise PermissionDenied()
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -32,5 +32,5 @@ class ReceiveUserChangePermissionsMixin:
 
     def dispatch(self, request, *args, **kwargs):
         if not self.has_permissions():
-            raise Http404()
+            raise PermissionDenied()
         return super().dispatch(request, *args, **kwargs)
